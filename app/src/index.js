@@ -13,14 +13,9 @@ import { BrowserRouter } from "react-router-dom";
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <MoralisProvider
-        appId="wB1Zs8QazWmnYvlWuVi54Zo6YJIDqZF8zE3s4i3H"
-        serverUrl="https://prdnf18aks9p.usemoralis.com:2053/server"
-      >
         <Provider store={store}>
           <App />
         </Provider>
-      </MoralisProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

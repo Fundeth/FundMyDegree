@@ -2,29 +2,110 @@ import React, { useEffect, useState } from "react";
 import ReactTooltip from "react-tooltip";
 
 const SideNav = (props) => {
-  const [animated, setAnimated] = useState(false);
-  console.log(props)
-  useEffect(() => {
-    setAnimated(true);
-  }, []);
+  const [numFields, setNumFields] = useState(props.fieldGroups.length);
   return (
   <div>
-    <div className="flex flex-col sticky">
-        <div className="flex-row bg-green-100 h-16 text-center text-bold text-xl justify-center rounded-t-lg">
-            Create Profile
+    <div className="flex flex-col justify-center text-center  sticky">
+      
+        <div className="flex-row bg-green-600 h-16 font-bold text-xl rounded-t-lg text-white	">
+            { props.formType }
         </div>
-        <button className="flex-row h-12 items-center justify-center border-b-2 border-l-2 border-r-2 hover:bg-gray-100">
-            Basic Info
-        </button>
-        <button className="flex-row h-12 items-center justify-center border-b-2 border-l-2 border-r-2 hover:bg-gray-100">
-            Address
-        </button>
-        <button className="flex-row h-12 items-center justify-center border-b-2 border-l-2 border-r-2 hover:bg-gray-100">
-            Education
-        </button>
-        <button className="flex-row h-12 items-center justify-center border-b-2 border-l-2 border-r-2 hover:bg-gray-100 rounded-b-lg">
-            Review
-        </button>
+
+        {props.page === 0 && numFields > 0  && (
+          <button 
+              className="flex-row h-12 items-center border-b-2 border-l-2 border-r-2 border-green-600 text-green-600 font-bold outline-none">
+              {props.fieldGroups[0]}
+          </button>
+        )}
+        {props.page !== 0 && numFields > 0  && (
+          <button className="flex-row h-12 items-center border-b-2 border-l-2 border-r-2 hover:bg-gray-100 outline-none"
+                  onClick= {() => {
+                    props.setPage(0)
+                  }}
+          >
+              {props.fieldGroups[0]}
+          </button>
+        )}
+
+        {props.page === 1 && numFields > 1 &&  (
+
+          <button className="flex-row h-12 items-center border-b-2 border-l-2 border-r-2 border-green-600 text-green-600 font-bold outline-none">
+              {props.fieldGroups[1]}
+          </button>
+        )}
+        {props.page !== 1 && numFields > 1 && (
+          <button className="flex-row h-12 items-center border-b-2 border-l-2 border-r-2 hover:bg-gray-100 outline-none"
+                  onClick= {() => {
+                    props.setPage(1)
+                  }}
+          >
+              {props.fieldGroups[1]}
+          </button>
+        )}
+
+        {props.page === 2 && numFields > 2 && (
+
+          <button className="flex-row h-12 items-center border-b-2 border-l-2 border-r-2 border-green-600 text-green-600 font-bold outline-none">
+              {props.fieldGroups[2]}
+          </button>
+        )}
+        {props.page !== 2 && numFields > 2 && (
+          <button 
+            className="flex-row h-12 items-center border-b-2 border-l-2 border-r-2 hover:bg-gray-100 outline-none"
+            onClick= {() => {
+              props.setPage(2)
+            }}
+          >
+              {props.fieldGroups[2]}
+          </button>
+        )}
+
+        {props.page === 3 && numFields > 3 && (
+          <button className="flex-row h-12 items-center border-b-2 border-l-2 border-green-600 border-r-2 rounded-b-lg text-green-600 font-bold outline-none">
+              {props.fieldGroups[3]}
+          </button>
+        )}
+        {props.page !== 3 && numFields > 3 && (
+          <button className="flex-row h-12 items-center border-b-2 border-l-2 border-r-2 hover:bg-gray-100 rounded-b-lg outline-none"
+                  onClick= {() => {
+                    props.setPage(3)
+                  }}
+          >
+              {props.fieldGroups[3]}
+          </button>
+        )}
+
+
+      {props.page === 4 && numFields > 4 && (
+          <button className="flex-row h-12 items-center border-b-2 border-l-2 border-green-600 border-r-2 rounded-b-lg text-green-600 font-bold outline-none">
+              {props.fieldGroups[4]}
+          </button>
+        )}
+        {props.page !== 4 && numFields > 4 && (
+          <button className="flex-row h-12 items-center border-b-2 border-l-2 border-r-2 hover:bg-gray-100 rounded-b-lg outline-none"
+                  onClick= {() => {
+                    props.setPage(4)
+                  }}
+          >
+              {props.fieldGroups[4]}
+          </button>
+        )}
+
+
+      {props.page === 5 && numFields > 5 && (
+          <button className="flex-row h-12 items-center border-b-2 border-l-2 border-green-600 border-r-2 rounded-b-lg text-green-600 font-bold outline-none">
+              {props.fieldGroups[5]}
+          </button>
+        )}
+        {props.page !== 5 && numFields > 5 && (
+          <button className="flex-row h-12 items-center border-b-2 border-l-2 border-r-2 hover:bg-gray-100 rounded-b-lg outline-none"
+                  onClick= {() => {
+                    props.setPage(5)
+                  }}
+          >
+              {props.fieldGroups[5]}
+          </button>
+        )}
     </div>
 
   </div>

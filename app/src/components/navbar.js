@@ -10,7 +10,7 @@ const Navbar = () => {
   return (
     <nav className={`${
       animated ? "" : "translate-y-10 opacity-0"
-    } transform transition flex justify-between items-center h-16 text-black mx-auto px-4 sticky top-0 z-10 bg-white backdrop-filter backdrop-blur bg-clip-padding bg-opacity-0 shadow-lg`}
+    } transform transition flex justify-between items-center h-16 text-black mx-auto px-4 sticky top-0 z-10 bg-white bg-clip-padding shadow-lg`}
     role="navigation">
       <div class="flex flex-shrink-0 text-black mr-6 pl-8 pr-8">
         <img src={logo2} className="h-12" />

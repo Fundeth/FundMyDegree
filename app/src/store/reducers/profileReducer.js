@@ -1,14 +1,20 @@
 const reducer = (
   state = {
     firstName: "",
+    profilePicture: "",
+    profilePictureDimensions: "",
     lastName: "",
     email: "",
     address1: "",
+    address2: "",
     city: "",
     state: "",
     postalCode: "",
     country: "",
-    educationLevel: "sdsd",
+    educationLevel: "",
+    website: "",
+    linkedIn: "",
+    portfolio: ""
   },
   action
 ) => {

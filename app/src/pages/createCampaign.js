@@ -4,9 +4,8 @@ import Name from "../components/forms/basicInfo";
 import Review from "../components/forms/review";
 import Address from "../components/forms/address";
 import Education from "../components/forms/education";
-import Portfolio from "../components/forms/portfolio";
 
-const CreateProfile = () => {
+const CreateCampaign = () => {
   const [page, setPage] = useState(0);
 
   function goNextPage() {
@@ -20,19 +19,18 @@ const CreateProfile = () => {
         <div className="flex flex-row ml-16 mr-16 mt-12">
             <div className="w-1/4"> 
                 <SideNav 
-                  formType="Create Profile"
-                  fieldGroups = {["Basic Info", "Profile Picture", "Address", "Education", "Portfolio", "Review"]}
-                  page={page}
-                  setPage={setPage}
+                    formType="Create Campaign"
+                    fieldGroups = {["Target", "School Info", "Paragraph", "Review"]}
+                    page={page}
+                    setPage={setPage}
                 />
             </div>
 
             <div className="flex flex-col mt-4 w-full ml-32 text-black">
                 {page === 0 && <Name />}
-                {page === 2 && <Address />}
-                {page === 3 && <Education />}
-                {page === 4 && <Portfolio />}
-                {page === 5 && <Review />}
+                {page === 1 && <Address />}
+                {page === 2 && <Education />}
+                {page === 3 && <Review />}
 
                 <div className="flex flex-row mt-16">
                   <div className="flex flex-col w-1/3 justify-center">
@@ -49,7 +47,7 @@ const CreateProfile = () => {
                   </div>
 
                   <div className="flex flex-col w-1/3 items-center">               
-                    {page !== 5 && page !== 0 && <button 
+                    {page !== 3 && page !== 0 && <button 
                       class="w-32 bg-green-600 text-white rounded-full py-3 px-6 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
                       type="button"
                       onClick={goNextPage}
@@ -57,7 +55,7 @@ const CreateProfile = () => {
                       Next
                   </button>}
 
-                  {page !== 5 && page === 0 && <button 
+                  {page !== 3 && page === 0 && <button 
                       class="w-32 bg-green-600 text-white rounded-full py-3 px-6 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
                       type="button"
                       onClick={goNextPage}
@@ -65,7 +63,7 @@ const CreateProfile = () => {
                       Next
                   </button>}
 
-                  {page === 5 && <button 
+                  {page === 3 && <button 
                       class="w-48 bg-green-600 text-white rounded-full py-3 px-6 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
                       type="button"
                   >
@@ -84,4 +82,4 @@ const CreateProfile = () => {
   )
 };
 
-export default CreateProfile;
+export default CreateCampaign;

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Layout from "./layout/mainLayout";
 import { Route, Switch } from "react-router-dom";
 import CreateProfile from "./pages/createProfile";
+import CreateCampaign from "./pages/createCampaign";
 import Campaign from "./pages/campaign";
 import StudentDashboard from "./pages/studentDashboard";
 import CollegeDashboard from "./pages/collegeDashboard";
@@ -37,6 +38,9 @@ const App = () => {
         </Route>
         <Route exact path="/createProfile">
           <CreateProfile />
+        </Route>
+        <Route exact path="/createCampaign">
+          <CreateCampaign />
         </Route>
       </Switch>
     </Layout>

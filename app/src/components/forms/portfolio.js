@@ -15,27 +15,27 @@ const Portfolio = () => {
     </div>
     <div className="flex flex-row mt-12">
         <div className="flex flex-col w-1/4 mr-8">
+            <div className="ml-2 flex flex-row text-sm">Website</div>
             <input
                 value={profile.website}
                 autoFocus
-                className="flex flex-row bg-transparent outline-none border-b-2 border-black justify-center"
+                className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
                 onChange={(evt) => updateWebsite(evt.target.value)}
             ></input>
-            <div className="flex flex-row text-sm">Website</div>
+            <div className="ml-2 mt-8 flex flex-row text-sm">LinkedIn</div>
             <input
                 value={profile.linkedIn}
                 autoFocus
-                className="mt-12 flex flex-row bg-transparent outline-none border-b-2 border-black justify-center"
+                className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
                 onChange={(evt) => updateLinkedIn(evt.target.value)}
             ></input>
-            <div className="flex flex-row text-sm">LinkedIn</div>
+            <div className="ml-2 mt-8 flex flex-row text-sm">Link to Portfolio</div>
             <input
                 value={profile.portfolio}
                 autoFocus
-                className="mt-12 flex flex-row bg-transparent outline-none border-b-2 border-black justify-center"
+                className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
                 onChange={(evt) => updatePortfolio(evt.target.value)}
             ></input>
-            <div className="flex flex-row text-sm">Link to Portfolio</div>
         </div>
     </div>
   </div>

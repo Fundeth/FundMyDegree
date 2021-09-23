@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import SideNav from "../components/sideNav";
-import Name from "../components/forms/basicInfo";
-import Review from "../components/forms/review";
-import Address from "../components/forms/address";
-import Education from "../components/forms/education";
+import Target from "../components/forms/target";
+import ReviewCampaign from "../components/forms/reviewCampaign";
+import SchoolInfo from "../components/forms/schoolInfo";
+import Paragraph from "../components/forms/paragraph";
 
 const CreateCampaign = () => {
   const [page, setPage] = useState(0);
@@ -27,10 +27,10 @@ const CreateCampaign = () => {
             </div>
 
             <div className="flex flex-col mt-4 w-full ml-32 text-black">
-                {page === 0 && <Name />}
-                {page === 1 && <Address />}
-                {page === 2 && <Education />}
-                {page === 3 && <Review />}
+                {page === 0 && <Target />}
+                {page === 1 && <SchoolInfo />}
+                {page === 2 && <Paragraph />}
+                {page === 3 && <ReviewCampaign />}
 
                 <div className="flex flex-row mt-16">
                   <div className="flex flex-col w-1/3 justify-center">

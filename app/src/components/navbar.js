@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AnchorLink from "react-anchor-link-smooth-scroll";
-import logo2 from "../images/logo2.png";
+import logo3 from "../images/logo3.png";
 
 const Navbar = () => {
   const [animated, setAnimated] = useState(false);
@@ -10,10 +10,10 @@ const Navbar = () => {
   return (
     <nav className={`${
       animated ? "" : "translate-y-10 opacity-0"
-    } transform transition flex justify-between items-center h-16 text-black mx-auto px-4 sticky top-0 z-10 bg-white bg-clip-padding shadow-lg`}
+    } transform transition flex justify-between items-center h-16 text-black mx-auto px-4 bg-beige sticky top-0 z-10 bg-clip-padding shadow-lg`}
     role="navigation">
       <div class="flex flex-shrink-0 text-black mr-6 pl-8 pr-8">
-        <img src={logo2} className="h-12" />
+        <img src={logo3} className="h-12" />
       </div>
       <div className="px-4 cursor-pointer lg:hidden xl:hidden 2xl:hidden">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -22,10 +22,10 @@ const Navbar = () => {
       </div>
       <div class="md:hidden sm:hidden w-full block flex-grow lg:flex lg:w-auto items-center justify-end pr-8">
         <div class="text-sm lg:flex-grow">
-            <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-green-900 mr-4 ">
+            <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-black mr-4 transform transition duration-500 ease-linear hover:scale-105">
             I am a student
             </a>
-            <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-green-900 mr-4">
+            <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-black mr-4 transform transition duration-500 ease-linear hover:scale-105">
             I am an university
             </a>
         </div>
@@ -35,7 +35,7 @@ const Navbar = () => {
             </svg>        
         </button>
         <div>
-          <a href="#" class="rounded-full py-3 px-6 inline-block text-sm bg-green-100 leading-none border text-black hover:border-green-900 hover:text-white hover:bg-green-800 mt-4 lg:mt-0 transform transition-colors ease-in-out duration-500 ">Connect Wallet</a>
+          <a href="#" class="rounded-full py-3 px-6 inline-block text-sm bg-green-600 leading-none border text-white hover:border-green-900 hover:text-white hover:bg-green-800 mt-4 lg:mt-0 transform transition-colors ease-in-out duration-500 ">Connect Wallet</a>
         </div>
       </div>
     </nav>

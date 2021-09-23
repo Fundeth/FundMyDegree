@@ -7,9 +7,9 @@ const SideNav = (props) => {
   <div>
     <div className="flex flex-col justify-center text-center  sticky">
       
-        <div className="flex-row bg-green-600 h-16 font-bold text-xl rounded-t-lg text-white	">
+        <button className="flex-row bg-green-600 h-16 font-bold text-xl rounded-t-lg text-white items-center outline-none cursor-default">
             { props.formType }
-        </div>
+        </button>
 
         {props.page === 0 && numFields > 0  && (
           <button 

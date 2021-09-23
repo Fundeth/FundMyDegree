@@ -15,13 +15,14 @@ const Education = () => {
     </div>
     <div className="flex flex-row mt-12">
         <div className="flex flex-col w-1/4 mr-8">
+            <div className="ml-2 flex flex-row text-sm">Highest level of education</div>
+
             <input
                 value={profile.educationLevel}
                 autoFocus
-                className="flex flex-row bg-transparent outline-none border-b-2 border-black justify-center"
+                className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
                 onChange={(evt) => updateEducationLevel(evt.target.value)}
             ></input>
-            <div className="flex flex-row text-sm">Highest level of education</div>
         </div>
     </div>
   </div>

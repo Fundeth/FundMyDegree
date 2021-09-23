@@ -117,3 +117,67 @@ export const updatePortfolio = (portfolio) => {
     });
   };
 };
+
+export const updateTarget = (target) => {
+  return (dispatch) => {
+    dispatch({
+      type: "target",
+      payload: target,
+    });
+  };
+};
+
+export const updateDescription = (description) => {
+  return (dispatch) => {
+    dispatch({
+      type: "description",
+      payload: description,
+    });
+  };
+};
+
+export const updateStudentId = (studentId) => {
+  return (dispatch) => {
+    dispatch({
+      type: "studentId",
+      payload: studentId,
+    });
+  };
+};
+
+export const updateSchoolName = (schoolName) => {
+  return (dispatch) => {
+    dispatch({
+      type: "schoolName",
+      payload: schoolName,
+    });
+  };
+};
+
+export const updatePitch = (pitch) => {
+  return (dispatch) => {
+    dispatch({
+      type: "pitch",
+      payload: pitch,
+    });
+  };
+};
+
+export const updateMajor = (major) => {
+  return (dispatch) => {
+    dispatch({
+      type: "major",
+      payload: major,
+    });
+  };
+};
+
+
+export const updateSchoolEmail = (schoolEmail) => {
+  return (dispatch) => {
+    dispatch({
+      type: "schoolEmail",
+      payload: schoolEmail,
+    });
+  };
+};

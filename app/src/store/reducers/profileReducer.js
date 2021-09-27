@@ -14,7 +14,8 @@ const reducer = (
     educationLevel: "",
     website: "",
     linkedIn: "",
-    portfolio: ""
+    portfolio: "",
+    ethId:""
   },
   action
 ) => {

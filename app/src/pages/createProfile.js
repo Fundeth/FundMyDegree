@@ -5,9 +5,13 @@ import Review from "../components/forms/review";
 import Address from "../components/forms/address";
 import Education from "../components/forms/education";
 import Portfolio from "../components/forms/portfolio";
+import { insertUserBasic } from "../adapters/MoralisAdapter";
+import { useSelector, useDispatch } from "react-redux";
 
 const CreateProfile = () => {
   const [page, setPage] = useState(0);
+  const profile = useSelector((state) => state.profile);
+
 
   function goNextPage() {
     setPage((page) => page + 1);
@@ -67,8 +71,14 @@ const CreateProfile = () => {
 
                   {page === 5 && <button 
                       class="w-48 bg-green-600 text-white rounded-full py-3 px-6 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
-                      type="button"
-                  >
+                      type="button" onClick={() => {
+                        insertUserBasic(profile).then((res) => {
+                          console.log(`res on creation ${res}`)
+                        }).catch((err) => {
+                          console.log(`error ${err}`)
+                        })
+                      }}
+                  >   
                       Create Campaign
                   </button>}
                   </div>

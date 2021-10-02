@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AnchorLink from "react-anchor-link-smooth-scroll";
-import logo3 from "../images/logo3.png";
+import logo from "../images/logo.png";
 
 const Navbar = () => {
   const [animated, setAnimated] = useState(false);
@@ -12,8 +12,8 @@ const Navbar = () => {
       animated ? "" : "translate-y-10 opacity-0"
     } transform transition flex justify-between items-center h-16 text-black mx-auto px-4 bg-beige sticky top-0 z-10 bg-clip-padding shadow-lg`}
     role="navigation">
-      <div class="flex flex-shrink-0 text-black mr-6 pl-8 pr-8">
-        <img src={logo3} className="h-12" />
+      <div class="flex flex-shrink-0 text-black mr-2 pl-8">
+        <img src={logo} className="h-48" />
       </div>
       <div className="px-4 cursor-pointer lg:hidden xl:hidden 2xl:hidden">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

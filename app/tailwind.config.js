@@ -8,6 +8,10 @@ module.exports = {
       },
       colors: {
         beige: '#F0EAD6',
+      },
+      spacing: {
+        '128': '32rem',
+        '144': '36rem',
       }
     },
   },

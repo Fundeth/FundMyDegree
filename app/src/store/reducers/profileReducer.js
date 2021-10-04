@@ -15,7 +15,12 @@ const reducer = (
     website: "",
     linkedIn: "",
     portfolio: "",
-    ethId:""
+    ethId:"",
+    schoolContact:"",
+    schoolContactEmail:"",
+    schoolContactPhone:"",
+    schoolAccreditation:"",
+    schoolphone:""
   },
   action
 ) => {

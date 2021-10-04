@@ -41,9 +41,29 @@ export async function getSchoolDetailInfo(metamask_id) {
   return Moralis.Cloud.run("getSchoolDetailInfo", params);
 }
 
-export async function insertSchool(params) {
-  /*const params = {
-    email,
-  };*/
+export async function insertSchool(profile) {
+  const params = {
+    metamask_id: "7777777777777777",
+    first_name: profile.firstName,
+    last_name: profile.lastName,
+    email: profile.email,
+    role: "school",
+    address_line1: profile.address1,
+    address_line2: profile.address2,
+    city: profile.city,
+    state: profile.state,
+    zip_pin: profile.postalCode,
+    country: profile.country,
+    degree: profile.educationLevel,
+    portfolio_link: profile.portfolio,
+    website: profile.website,
+    photo_dimension: profile.profilePictureDimensions,
+    contact_person: profile.schoolContact,
+    contact_person_email: profile.schoolContactEmail,
+    contact_person_phone: profile.schoolContactPhone,
+    accreditation: profile.schoolAccreditation,
+    phone: profile.schoolphone
+    };
+  
   return Moralis.Cloud.run("insertSchool", params);
 }

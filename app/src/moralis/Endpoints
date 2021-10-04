@@ -27,6 +27,7 @@ Moralis.Cloud.define("insertUserBasic", async (request) => {
   userBasic.set("campaign_id", request.params.campaign_id);
   userBasic.set("photo_dimension", request.params.photo_dimension);
   userBasic.set("portfolio_link", request.params.portfolio_link);
+  userBasic.set("phone", request.params.phone);
   const results1 = await userBasic.save().then((userBasic) => {
   // Execute any logic that should take place after the object is saved.
   logger.info('New object created with objectId: ' + userBasic.objectId);
@@ -71,6 +72,7 @@ Moralis.Cloud.define("insertUserBasic", async (request) => {
   results.set("campaign_id", request.params.campaign_id);
   results.set("photo_dimension", request.params.photo_dimension);
   results.set("portfolio_link", request.params.portfolio_link);
+  results.set("phone", request.params.phone);
     const results2 = await results.save().then((results) => {
   // Execute any logic that should take place after the object is saved.
   logger.info('New object created with objectId: ' + results.objectId);
@@ -110,6 +112,7 @@ Moralis.Cloud.define("insertSchool", async (request) => {
   userBasic.set("zip_pin", parseInt(request.params.zip_pin));
   userBasic.set("email", request.params.email);
   userBasic.set("website", request.params.website);
+  userBasic.set("phone", request.params.phone);
   //userBasic.set("campaign_id", request.params.campaign_id);
     //start school info setter
   const object_contact_person = { name: request.params.contact_person, email: request.params.contact_person_email, phone: request.params.contact_person_phone };
@@ -141,6 +144,7 @@ Moralis.Cloud.define("insertSchool", async (request) => {
   results.set("campaign_id", request.params.campaign_id);
   results.set("photo_dimension", request.params.photo_dimension);
   results.set("portfolio_link", request.params.portfolio_link);
+  results.set("phone", request.params.phone);
   const object_contact_person = { name: request.params.contact_person, email: request.params.contact_person_email, phone: request.params.contact_person_phone };
   //schoolInfo.set("metamask_id", request.params.metamask_id);
   resultsSchool.set("accreditation", request.params.accreditation);

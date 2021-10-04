@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SideNav from "../components/sideNav";
-import Name from "../components/forms/basicInfo";
+import BasicInfo from "../components/forms/basicInfo";
 import Review from "../components/forms/review";
 import Address from "../components/forms/address";
 import Education from "../components/forms/education";
@@ -32,7 +32,7 @@ const CreateProfile = () => {
             </div>
 
             <div className="flex flex-col mt-4 w-full ml-32 text-black">
-                {page === 0 && <Name />}
+                {page === 0 && <BasicInfo />}
                 {page === 2 && <Address />}
                 {page === 3 && <Education />}
                 {page === 4 && <Portfolio />}

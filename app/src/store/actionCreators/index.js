@@ -181,3 +181,48 @@ export const updateSchoolEmail = (schoolEmail) => {
     });
   };
 };
+
+export const updateSchoolContact = (schoolContact) => {
+  return (dispatch) => {
+    dispatch({
+      type: "schoolContact",
+      payload: schoolContact,
+    });
+  };
+};
+
+export const updateSchoolContactEmail = (schoolContactEmail) => {
+  return (dispatch) => {
+    dispatch({
+      type: "schoolContactEmail",
+      payload: schoolContactEmail,
+    });
+  };
+};
+
+export const updateSchoolContactPhone = (schoolContactPhone) => {
+  return (dispatch) => {
+    dispatch({
+      type: "schoolContactPhone",
+      payload: schoolContactPhone,
+    });
+  };
+};
+
+export const updateAccreditation = (schoolAccreditation) => {
+  return (dispatch) => {
+    dispatch({
+      type: "schoolAccreditation",
+      payload: schoolAccreditation,
+    });
+  };
+};
+
+export const updateSchoolPhone = (schoolphone) => {
+  return (dispatch) => {
+    dispatch({
+      type: "schoolphone",
+      payload: schoolphone,
+    });
+  };
+};

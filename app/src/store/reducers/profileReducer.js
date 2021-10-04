@@ -14,7 +14,13 @@ const reducer = (
     educationLevel: "",
     website: "",
     linkedIn: "",
-    portfolio: ""
+    portfolio: "",
+    ethId:"",
+    schoolContact:"",
+    schoolContactEmail:"",
+    schoolContactPhone:"",
+    schoolAccreditation:"",
+    schoolphone:""
   },
   action
 ) => {

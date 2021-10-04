@@ -16,7 +16,6 @@ export const updateLastName = (lastName) => {
   };
 };
 
-
 export const updateEmail = (email) => {
   return (dispatch) => {
     dispatch({
@@ -62,7 +61,6 @@ export const updateState = (state) => {
   };
 };
 
-
 export const updateCountry = (country) => {
   return (dispatch) => {
     dispatch({
@@ -71,7 +69,6 @@ export const updateCountry = (country) => {
     });
   };
 };
-
 
 export const updatePostalCode = (postalCode) => {
   return (dispatch) => {
@@ -172,12 +169,20 @@ export const updateMajor = (major) => {
   };
 };
 
-
 export const updateSchoolEmail = (schoolEmail) => {
   return (dispatch) => {
     dispatch({
       type: "schoolEmail",
       payload: schoolEmail,
+    });
+  };
+};
+
+export const setCampaignContract = (contract) => {
+  return (dispatch) => {
+    dispatch({
+      type: "campaignContract",
+      payload: contract,
     });
   };
 };

@@ -12,9 +12,16 @@ import ExploreCampaigns from "./pages/exploreCampaigns";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "./store";
+import { initContracts } from "./adapters/contracts";
 
 const App = () => {
-
+  const dispatch = useDispatch();
+  const { setCampaignContract } = bindActionCreators(actionCreators, dispatch);
+  useEffect(() => {
+    initContracts().then((res) => {
+      setCampaignContract(res.campaignContract);
+    });
+  }, []);
   return (
     <Layout>
       <Switch>

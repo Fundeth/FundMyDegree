@@ -230,3 +230,21 @@ export const updateSchoolPhone = (schoolphone) => {
     });
   };
 };
+
+export const setProfile = (user) => {
+  return (dispatch) => {
+    dispatch({
+      type: "publicView",
+      payload: user,
+    });
+  };
+};
+
+export const setLoading = (loading) => {
+  return (dispatch) => {
+    dispatch({
+      type: "loading",
+      payload: loading,
+    });
+  };
+};

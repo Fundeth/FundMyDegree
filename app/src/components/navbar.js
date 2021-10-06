@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import logo from "../images/logo.png";
 import { useMoralis } from "react-moralis";
+import { formatAddress } from "../utils/utils";
+import { Link, useHistory } from "react-router-dom";
+import { getUser } from "../adapters/MoralisAdapter";
+import { useSelector, useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actionCreators } from "../store/index";
 
 const Navbar = () => {
   const {
@@ -12,14 +18,24 @@ const Navbar = () => {
     Moralis,
     user,
   } = useMoralis();
+
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { setProfile, setLoading } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
+
   return (
     <nav
       className="flex justify-between items-center h-16 text-black mx-auto px-4 bg-beige sticky top-0 z-10 bg-clip-padding shadow-lg"
       role="navigation"
     >
-      <div class="flex flex-shrink-0 text-black mr-2 pl-8">
-        <img src={logo} className="h-48" />
-      </div>
+      <Link to="/">
+        <div class="flex flex-shrink-0 text-black mr-2 pl-8">
+          <img src={logo} className="h-48" />
+        </div>
+      </Link>
       <div className="px-4 cursor-pointer lg:hidden xl:hidden 2xl:hidden">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -38,18 +54,68 @@ const Navbar = () => {
       </div>
       <div class="md:hidden sm:hidden w-full block flex-grow lg:flex lg:w-auto items-center justify-end pr-8">
         <div class="text-sm lg:flex-grow">
-          <a
-            href="#responsive-header"
-            class="block mt-4 lg:inline-block lg:mt-0 text-black mr-4 transform transition duration-500 ease-linear hover:scale-105"
-          >
-            I am a student
-          </a>
-          <a
-            href="#responsive-header"
-            class="block mt-4 lg:inline-block lg:mt-0 text-black mr-4 transform transition duration-500 ease-linear hover:scale-105"
-          >
-            I am an university
-          </a>
+          {!isAuthenticated && (
+            <div>
+              <button
+                class="block mt-4 lg:inline-block lg:mt-0 text-black mr-4 transform transition duration-500 ease-linear hover:scale-105"
+                onClick={() => {
+                  if (!isAuthenticated) {
+                    authenticate().then(() => {
+                      setLoading(true);
+                      getUser().then((user) => {
+                        console.log(user);
+                        setProfile(user);
+                        setLoading(false);
+                        if (user && user.get("role") === "student") {
+                          history.push(
+                            `/studentProfile/${user.get("ethAddress")}`
+                          );
+                        } else if (user && user.get("role") === "school") {
+                          history.push("/collegeDashboard");
+                        } else {
+                          history.push("/createProfile");
+                        }
+                      });
+                    });
+                  } else {
+                    history.push("/createProfile");
+                  }
+                }}
+              >
+                I am a student
+              </button>
+              <button
+                class="block mt-4 lg:inline-block lg:mt-0 text-black mr-4 transform transition duration-500 ease-linear hover:scale-105"
+                onClick={() => {
+                  if (!isAuthenticated) {
+                    authenticate().then(() => {
+                      setLoading(true);
+
+                      getUser().then((user) => {
+                        setProfile(user);
+                        setLoading(false);
+
+                        console.log(`user connected ${user}`);
+                        if (user && user.get("role") === "school") {
+                          history.push("/collegeDashboard");
+                        } else if (user && user.get("role") === "student") {
+                          history.push(
+                            `/studentProfile/${user.get("ethAddress")}`
+                          );
+                        } else {
+                          history.push("/createSchoolProfile");
+                        }
+                      });
+                    });
+                  } else {
+                    history.push("/createSchoolProfile");
+                  }
+                }}
+              >
+                I am an university
+              </button>
+            </div>
+          )}
         </div>
         <button
           class="py-4 px-1 relative border-2 border-transparent text-gray-800 rounded-full hover:text-green-900 focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out"
@@ -70,14 +136,54 @@ const Navbar = () => {
             />
           </svg>
         </button>
-        <div>
-          <a
+        {!isAuthenticating && !isAuthenticated && (
+          <div>
+            <button
+              href="#"
+              class="rounded-full py-3 px-6 inline-block text-sm bg-green-600 leading-none border text-white hover:border-green-900 hover:text-white hover:bg-green-800 mt-4 lg:mt-0 transform transition-colors ease-in-out duration-500 "
+              onClick={() => {
+                if (!isAuthenticated) {
+                  authenticate().then(() => {
+                    setLoading(true);
+
+                    getUser().then((user) => {
+                      setProfile(user);
+                      setLoading(false);
+
+                      console.log(`user connected ${user}`);
+                    });
+                  });
+                } else if (isAuthenticated) {
+                  console.log("authed");
+                }
+              }}
+            >
+              Connect Wallet
+            </button>
+          </div>
+        )}
+        {isAuthenticated && (
+          <button
+            href="#"
+            class="rounded-full py-3 px-6 inline-block text-sm bg-green-600 leading-none border text-white hover:border-green-900 hover:text-white hover:bg-green-800 mt-4 lg:mt-0 transform transition-colors ease-in-out duration-500 "
+            onClick={() => {
+              if (isAuthenticated) {
+                logout();
+                history.push("/");
+              }
+            }}
+          >
+            {formatAddress(user?.get("ethAddress"))}
+          </button>
+        )}
+        {isAuthenticating && (
+          <button
             href="#"
             class="rounded-full py-3 px-6 inline-block text-sm bg-green-600 leading-none border text-white hover:border-green-900 hover:text-white hover:bg-green-800 mt-4 lg:mt-0 transform transition-colors ease-in-out duration-500 "
           >
-            Connect Wallet
-          </a>
-        </div>
+            Connecting ...
+          </button>
+        )}
       </div>
     </nav>
   );

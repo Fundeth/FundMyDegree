@@ -17,3 +17,23 @@ export async function initContracts() {
   );
   return { campaignContract };
 }
+
+export async function createCampaign(
+  contract,
+  college,
+  selectionDeadline,
+  verificationDeadline,
+  target,
+  acceptanceDays,
+  info
+) {
+  const tx = await contract.start(
+    college,
+    selectionDeadline,
+    verificationDeadline,
+    target,
+    acceptanceDays,
+    info
+  );
+  return tx.wait();
+}

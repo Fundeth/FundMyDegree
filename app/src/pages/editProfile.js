@@ -9,10 +9,8 @@ import { insertUserBasic } from "../adapters/MoralisAdapter";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 
-const CreateProfile = () => {
+const EditProfile = () => {
   const [page, setPage] = useState(0);
-  const loading = useSelector((state) => state.loading.loading);
-  const history = useHistory();
   const profile = useSelector((state) => state.profile.publicView);
   const [firstName, setFirstName] = useState(profile?.get("first_name"));
   const [lastName, setLastName] = useState(profile?.get("last_name"));
@@ -28,6 +26,10 @@ const CreateProfile = () => {
   const [linkedIn, setLinkedIn] = useState(profile?.get("linkedIn"));
   const [portfolio, setPortfolio] = useState(profile?.get("portfolio_link"));
 
+  const loading = useSelector((state) => state.loading.loading);
+
+  const history = useHistory();
+
   function goNextPage() {
     setPage((page) => page + 1);
   }
@@ -39,16 +41,12 @@ const CreateProfile = () => {
     return <div>Loading</div>;
   }
 
-  if (profile) {
-    history.push("/editProfile");
-  }
-
   return (
     <div className="flex flex-col w-screen">
       <div className="flex flex-row ml-16 mr-16 mt-12">
         <div className="w-1/4">
           <SideNav
-            formType="Create Profile"
+            formType="Edit Profile"
             fieldGroups={[
               "Basic Info",
               "Profile Picture",
@@ -200,14 +198,16 @@ const CreateProfile = () => {
                     )
                       .then((res) => {
                         console.log(`res on creation ${res}`);
-                        history.push("/createCampaign");
+                        history.push(
+                          `/studentProfile/${profile.get("ethAddress")}`
+                        );
                       })
                       .catch((err) => {
                         console.log(`error ${err}`);
                       });
                   }}
                 >
-                  Create Campaign
+                  Save
                 </button>
               )}
             </div>
@@ -218,4 +218,4 @@ const CreateProfile = () => {
   );
 };
 
-export default CreateProfile;
+export default EditProfile;

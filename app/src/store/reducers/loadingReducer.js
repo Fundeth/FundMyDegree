@@ -1,6 +1,6 @@
 const reducer = (
   state = {
-    campaignContract: {},
+    loading: true,
   },
   action
 ) => {

@@ -1,5 +1,5 @@
 const reducer = (
-  state = {
+  /*state = {
     firstName: "",
     profilePicture: "",
     profilePictureDimensions: "",
@@ -15,14 +15,17 @@ const reducer = (
     website: "",
     linkedIn: "",
     portfolio: "",
-    ethId:"",
     schoolContact:"",
     schoolContactEmail:"",
     schoolContactPhone:"",
     schoolAccreditation:"",
-    schoolphone:"",
-    flag:"",
-    errorMessage:""
+    schoolphone:""
+  },*/
+  state = {
+    publicView: null,
+    privateView: null,
+    readOnly: true,
+    campaign: null,
   },
   action
 ) => {

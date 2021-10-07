@@ -16,7 +16,6 @@ export const updateLastName = (lastName) => {
   };
 };
 
-
 export const updateEmail = (email) => {
   return (dispatch) => {
     dispatch({
@@ -62,7 +61,6 @@ export const updateState = (state) => {
   };
 };
 
-
 export const updateCountry = (country) => {
   return (dispatch) => {
     dispatch({
@@ -71,7 +69,6 @@ export const updateCountry = (country) => {
     });
   };
 };
-
 
 export const updatePostalCode = (postalCode) => {
   return (dispatch) => {
@@ -172,7 +169,6 @@ export const updateMajor = (major) => {
   };
 };
 
-
 export const updateSchoolEmail = (schoolEmail) => {
   return (dispatch) => {
     dispatch({
@@ -182,6 +178,14 @@ export const updateSchoolEmail = (schoolEmail) => {
   };
 };
 
+export const setCampaignContract = (contract) => {
+  return (dispatch) => {
+    dispatch({
+      type: "campaignContract",
+      payload: contract,
+    });
+  };
+};
 export const updateSchoolContact = (schoolContact) => {
   return (dispatch) => {
     dispatch({
@@ -232,6 +236,11 @@ export const updateflag = (flag) => {
     dispatch({
       type: "flag",
       payload: flag,
+export const setProfile = (user) => {
+  return (dispatch) => {
+    dispatch({
+      type: "publicView",
+      payload: user,
     });
   };
 };
@@ -241,6 +250,23 @@ export const updateErrorMessage = (errorMessage) => {
     dispatch({
       type: "errorMessage",
       payload: errorMessage,
+    });
+  };
+};
+export const setCampaign = (campaign) => {
+  return (dispatch) => {
+    dispatch({
+      type: "campaign",
+      payload: campaign,
+    });
+  };
+};
+
+export const setLoading = (loading) => {
+  return (dispatch) => {
+    dispatch({
+      type: "loading",
+      payload: loading,
     });
   };
 };

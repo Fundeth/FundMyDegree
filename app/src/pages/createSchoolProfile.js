@@ -170,7 +170,7 @@ return false;
                 {page === 2 && <ContactSchool />}
                 {page === 3 && <Accreditation />}
                 {page === 4 && <ReviewSchool />}
-
+            </div>
               <div className="flex flex-row mt-12">
                 <div className="flex flex-col w-1/2">
                 <div className="ml-2 flex flex-row text-gray-800" id="div_element"></div>                    
@@ -182,60 +182,73 @@ return false;
               </div>               
               </div>     
 
-                <div className="flex flex-row mt-16">
-                  <div className="flex flex-col w-1/3 justify-center">
-                    {page !== 0 && (<button 
-                        class="text-gray-800 transition duration-500 ease-in-out inline-flex outline-none"
-                        type="button"
-                        onClick={goPreviousPage}
-                    >                   
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                        </svg>
-                        <span>Previous</span>
-                    </button>)}
-                  </div>
-
-                  <div className="flex flex-col w-1/3 items-center">               
-                    {page !== 4 && page !== 0 && <button 
-                      class="w-32 bg-green-600 text-white rounded-full py-3 px-6 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
-                      type="button"
-                      onClick={goNextPage}
+           <div className="flex flex-row mt-16">
+            <div className="flex flex-col w-1/3 justify-center">
+              {page !== 0 && (
+                <button
+                  class="text-gray-800 transition duration-500 ease-in-out inline-flex outline-none"
+                  type="button"
+                  onClick={goPreviousPage}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
                   >
-                      Next
-                  </button>}
-
-                  {page !== 4 && page === 0 && <button 
-                      class="w-32 bg-green-600 text-white rounded-full py-3 px-6 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
-                      type="button"
-                      onClick={goNextPage}
-                  >
-                      Next
-                  </button>}
-
-                  {page === 4 && <button 
-                      class="w-48 bg-green-600 text-white rounded-full py-3 px-6 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
-                      type="button" onClick={() => {
-                        insertSchool(profile).then((res) => {
-                          console.log(`res on creation ${res}`)
-                        }).catch((err) => {
-                          console.log(`error ${err}`)
-                        })
-                      }}
-                  >   
-                      Submit profile
-                  </button>}
-                  </div>
-
- 
-
-                </div>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                  <span>Previous</span>
+                </button>
+              )}
             </div>
-        </div>
-    </div>
 
- 
-  )
-};
+            <div className="flex flex-col w-1/3 items-center">
+              {page !== 4 && page !== 0 && (
+                <button
+                  class="w-32 bg-green-600 text-white rounded-full py-3 px-6 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
+                  type="button"
+                  onClick={goNextPage}
+                >
+                  Next
+                </button>
+              )}
+
+              {page !== 4 && page === 0 && (
+                <button
+                  class="w-32 bg-green-600 text-white rounded-full py-3 px-6 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
+                  type="button"
+                  onClick={goNextPage}
+                >
+                  Next
+                </button>
+              )}
+
+              {page === 4 && (
+                <button
+                  class="w-48 bg-green-600 text-white rounded-full py-3 px-6 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
+                  type="button"
+                  onClick={() => {
+                    insertSchool(profile).then((res) => {
+                        console.log(`res on creation ${res}`);
+                      }).catch((err) => {
+                        console.log(`error ${err}`);
+                      });
+                  }}>
+                  Submit profile
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      );};
 
 export default CreateSchoolProfile;

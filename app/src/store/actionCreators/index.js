@@ -236,6 +236,10 @@ export const updateflag = (flag) => {
     dispatch({
       type: "flag",
       payload: flag,
+    });
+  };
+};
+
 export const setProfile = (user) => {
   return (dispatch) => {
     dispatch({

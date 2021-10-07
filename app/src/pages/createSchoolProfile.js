@@ -55,16 +55,17 @@ return false;
     
       var flag = true;   
       //formValidation();  
-      
-      //console.log(profile.firstName);
+      console.log("outside");
+      console.log(profile.firstName);
       //console.log(errorMessage);
-      if((page === 0) && ((profile.firstName == "") || (profile.website == "") || (profile.email=="") || (profile.schoolphone=="") || (ValidateEmail(profile.email)===false)||(ValidateURL(profile.website)===false))) {   
-        //console.log(errorMessage+ "inside");
+      if((page === 0) && ((profile.firstName === undefined) || (profile.website === "") || (profile.email==="") || (profile.schoolphone==="") || (ValidateEmail(profile.email)===false)||(ValidateURL(profile.website)===false))) {   
+        console.log("inside");
           flag = false;
           var errorMessage = "Please fill up ";
           var errorMessage1 ="";
-          if(profile.firstName == ""){
+          if(profile.firstName == undefined){
             errorMessage = errorMessage+ "school name,";   
+            console.log(errorMessage+ "inside school name");
             } 
           if(profile.website == ""){
             errorMessage = errorMessage+ "website, ";   
@@ -74,6 +75,7 @@ return false;
             }   
           if(profile.schoolphone == ""){
             errorMessage = errorMessage+ "school phone ";   
+            console.log(errorMessage+ "inside school phone");
             } 
           if(ValidateURL(profile.website)===false){
               errorMessage1 = errorMessage1+ "incorrect website, ";  
@@ -170,7 +172,7 @@ return false;
                 {page === 2 && <ContactSchool />}
                 {page === 3 && <Accreditation />}
                 {page === 4 && <ReviewSchool />}
-            </div>
+           
               <div className="flex flex-row mt-12">
                 <div className="flex flex-col w-1/2">
                 <div className="ml-2 flex flex-row text-gray-800" id="div_element"></div>                    
@@ -248,7 +250,7 @@ return false;
           </div>
         </div>
       </div>
-    
+      </div>
       );};
 
 export default CreateSchoolProfile;

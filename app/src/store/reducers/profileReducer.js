@@ -20,7 +20,9 @@ const reducer = (
     schoolContactEmail:"",
     schoolContactPhone:"",
     schoolAccreditation:"",
-    schoolphone:""
+    schoolphone:"",
+    flag:"",
+    errorMessage:""
   },
   action
 ) => {

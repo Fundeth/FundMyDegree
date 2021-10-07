@@ -226,3 +226,21 @@ export const updateSchoolPhone = (schoolphone) => {
     });
   };
 };
+
+export const updateflag = (flag) => {
+  return (dispatch) => {
+    dispatch({
+      type: "flag",
+      payload: flag,
+    });
+  };
+};
+
+export const updateErrorMessage = (errorMessage) => {
+  return (dispatch) => {
+    dispatch({
+      type: "errorMessage",
+      payload: errorMessage,
+    });
+  };
+};

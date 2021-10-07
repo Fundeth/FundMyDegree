@@ -7,22 +7,62 @@ import Accreditation from "../components/forms/accreditation";
 import { insertSchool } from "../adapters/MoralisAdapter";
 import { useSelector, useDispatch } from "react-redux";
 import ContactSchool from "../components/forms/contactSchool";
+import formValidation from "../components/forms/validation";
+import { ValidationError } from "react-moralis";
 
 const CreateSchoolProfile = () => {
-  const [page, setPage] = useState(0);
-  const profile = useSelector((state) => state.profile);
+const [page, setPage] = useState(0);
+const profile = useSelector((state) => state.profile);
   
+function ValidateEmail(inputText)
+{
+var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+console.log(inputText);
+console.log(mailformat);
+if((inputText!== "") && (inputText.match(mailformat)))
+{
+//alert("Valid email address!");
+//document.form1.text1.focus();
+return true;
+}
+else
+{
+//alert("You have entered an invalid email address!");
+//document.form1.text1.focus();
+return false;
+}
+}
+
+function ValidateURL(inputText)
+{
+  var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+  var regex = new RegExp(expression);
+console.log(inputText);
+
+if((inputText!== "") && (inputText.match(regex)))
+{
+return true;
+}
+else
+{
+return false;
+}
+}
+
+
 
   function goNextPage() {
     
-      var flag = true;      
+      var flag = true;   
+      //formValidation();  
       
-      console.log(profile.firstName);
+      //console.log(profile.firstName);
       //console.log(errorMessage);
-      if((page === 0) && ((profile.firstName == "") || (profile.website == "") || (profile.email=="") || (profile.schoolphone==""))) {   
+      if((page === 0) && ((profile.firstName == "") || (profile.website == "") || (profile.email=="") || (profile.schoolphone=="") || (ValidateEmail(profile.email)===false)||(ValidateURL(profile.website)===false))) {   
         //console.log(errorMessage+ "inside");
           flag = false;
           var errorMessage = "Please fill up ";
+          var errorMessage1 ="";
           if(profile.firstName == ""){
             errorMessage = errorMessage+ "school name,";   
             } 
@@ -34,10 +74,18 @@ const CreateSchoolProfile = () => {
             }   
           if(profile.schoolphone == ""){
             errorMessage = errorMessage+ "school phone ";   
-            }          
+            } 
+          if(ValidateURL(profile.website)===false){
+              errorMessage1 = errorMessage1+ "incorrect website, ";  
+            }
+          if(ValidateEmail(profile.email) === false){            
+            errorMessage1 = errorMessage1+ "incorrect email address ";    
+            }       
+                       
           //alert(errorMessage);
           //$('#div_element').load(errorMessage +  ' #div_element');
           document.getElementById('div_element').innerHTML = errorMessage;
+          document.getElementById('div_element1').innerHTML = errorMessage1;
       } 
       if((page === 1) && ((profile.address1 == "") || (profile.city == "") || (profile.state=="") || (profile.postalCode=="") || (profile.country==""))) {   
         //console.log(errorMessage+ "inside");
@@ -60,10 +108,11 @@ const CreateSchoolProfile = () => {
             }                    
           document.getElementById('div_element').innerHTML = errorMessage;
       } 
-      if((page === 2) && ((profile.schoolContact == "") || (profile.schoolContactEmail == "") || (profile.schoolContactPhone==""))) {   
+      if((page === 2) && ((profile.schoolContact == "") || (profile.schoolContactEmail == "") || (profile.schoolContactPhone=="")||(ValidateEmail(profile.schoolContactEmail) === false))) {   
         //console.log(errorMessage+ "inside");
           flag = false;
           var errorMessage = "Please fill up ";
+          var errorMessage1 = "";
           if(profile.schoolContact == ""){
             errorMessage = errorMessage+ "school contact person,";   
             } 
@@ -72,8 +121,12 @@ const CreateSchoolProfile = () => {
             }   
           if(profile.schoolContactPhone == ""){
             errorMessage = errorMessage+ "school contact person phone ";   
-            }             
+            }   
+          if(ValidateEmail(profile.schoolContactEmail) === false){            
+              errorMessage1 = errorMessage1+ "incorrect email address ";   
+          }            
           document.getElementById('div_element').innerHTML = errorMessage;
+          document.getElementById('div_element1').innerHTML = errorMessage1;
       }
       if((page === 3) && ((profile.schoolAccreditation == ""))) {   
         //console.log(errorMessage+ "inside");
@@ -84,22 +137,19 @@ const CreateSchoolProfile = () => {
             }                  
           document.getElementById('div_element').innerHTML = errorMessage;
       }  
-      /*if(document.getElementById("email") == null || document.getElementById("email").minLength < 10) {   
-          flag = false;
-          errorMessage = errorMessage +  "email";         
-        //alert("please enter start_date");
-      }
-      */
-      //enumSchool.flag=flag;
-      //enumSchool.errorMessage=errorMessage;
+      
+      //flag=profile.flag;
+      //document.getElementById('div_element').innerHTML = profile.errorMessage;
   if(flag == true){
     document.getElementById('div_element').innerHTML = "";
+    document.getElementById('div_element1').innerHTML = "";
     setPage((page) => page + 1);
     }
   }
 
   function goPreviousPage() {
     document.getElementById('div_element').innerHTML = "";
+    document.getElementById('div_element1').innerHTML = "";
     setPage((page) => page - 1);
   }
   return (
@@ -123,9 +173,13 @@ const CreateSchoolProfile = () => {
 
               <div className="flex flex-row mt-12">
                 <div className="flex flex-col w-1/2">
-                <div className="ml-2 flex flex-row text-sm" id="div_element"></div>
-                    
-                </div>
+                <div className="ml-2 flex flex-row text-gray-800" id="div_element"></div>                    
+                </div>                
+              </div>
+              <div className="flex flex-row mt-12">
+              <div className="flex flex-col w-1/2">
+                <div className="ml-2 flex flex-row text-gray-800" id="div_element1"></div>                    
+              </div>               
               </div>     
 
                 <div className="flex flex-row mt-16">

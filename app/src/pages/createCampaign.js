@@ -16,14 +16,14 @@ const CreateCampaign = () => {
     (state) => state.contract.campaignContract
   );
   const profile = useSelector((state) => state.profile.publicView);
-  const campaign = useSelector((state) => state.profile.campaign);
-  const [target, setTarget] = useState(campaign.target);
-  const [school, setSchool] = useState(campaign.school);
-  const [major, setMajor] = useState(campaign.major);
-  const [email, setEmail] = useState(campaign.email);
-  const [studentId, setStudentId] = useState(campaign.studentId);
-  const [oneLiner, setOneLiner] = useState(campaign.oneLiner);
-  const [description, setDescription] = useState(campaign.description);
+  const campaign = useSelector((state) => state.campaign);
+  const [target, setTarget] = useState(campaign?.target);
+  const [school, setSchool] = useState(campaign?.school);
+  const [major, setMajor] = useState(campaign?.major);
+  const [email, setEmail] = useState(campaign?.email);
+  const [studentId, setStudentId] = useState(campaign?.studentId);
+  const [oneLiner, setOneLiner] = useState(campaign?.oneLiner);
+  const [description, setDescription] = useState(campaign?.description);
 
   function goNextPage() {
     setPage((page) => page + 1);

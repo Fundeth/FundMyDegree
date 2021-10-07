@@ -9,6 +9,7 @@ import "./openzeppelin/SafeERC20.sol";
 contract Campaign is CampaignStorage {
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
+    event CampaignCreation(bytes32 campaignId);
 
     address private tokenAddress;
     constructor(address _tokenAddress) {
@@ -52,7 +53,8 @@ contract Campaign is CampaignStorage {
     /**
      * @dev This is called at the start of a campaign by the student.
      **/
-    function start(address college, uint collegeSelectionDeadline, uint collegeVerificationDeadline, uint target, string calldata info) external returns (bytes32) {
+    function start(address college, uint collegeSelectionDeadline, uint collegeVerificationDeadline, uint target, string memory info) external returns (bytes32) {
+        console.log("hi");
         Installment memory installment = Installment(
             false,
             0
@@ -80,7 +82,7 @@ contract Campaign is CampaignStorage {
         );
         campaignIds.push(campaignId);
         campaignIdToCampaign[campaignId] = campaign;
-
+        emit CampaignCreation(campaignId);
         return campaignId;
     }
 
@@ -180,5 +182,9 @@ contract Campaign is CampaignStorage {
         require(campaignIdToCampaign[campaignId].locked == false, "Campaign is ongoing so locked amount cannot be withdrawn");
 
         IERC20(tokenAddress).safeTransferFrom(address(this), msg.sender, funderToCampaignIdToAmount[msg.sender][campaignId]);
+    }
+
+    function health() external pure returns(uint){
+        return 1;
     }
 }

@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 const Profile = (props) => {
   const profile = useSelector((state) => state.profile.publicView);
+  const readOnly = useSelector((state) => state.profile.readOnly);
+
   return (
     <div className="mb-16">
       <div className="flex flex-row mb-1">
@@ -99,16 +101,16 @@ const Profile = (props) => {
         accident, sometimes on purpose (injected humour and the like).
       </div>
       <div className="flex flex-row items-center justify-center">
-        {
+        {!readOnly && (
+          <button className="w-48 bg-green-600 text-white rounded-full py-3 px-3 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none">
+            Disburse
+          </button>
+        )}
+        {readOnly && (
           <button className="w-48 bg-green-600 text-white rounded-full py-3 px-3 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none">
             Donate
           </button>
-        }
-        {
-          <button className="w-48 bg-green-600 text-white rounded-full py-3 px-3 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none">
-            Donate
-          </button>
-        }
+        )}
       </div>
     </div>
   );

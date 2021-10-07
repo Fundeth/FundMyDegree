@@ -329,3 +329,21 @@ Moralis.Cloud.define("getUser", async (request) => {
     return false;
   }
 });
+
+Moralis.Cloud.define("addCampaign", async (request) => {
+  const logger = Moralis.Cloud.getLogger();
+  const query = new Moralis.Query("User_basic");
+  logger.info(` user ${JSON.stringify(request.user.get("ethAddress"))}`);
+
+  query.equalTo("ethAddress", request.user.get("ethAddress"));
+
+  try {
+    const res = await query.first({ useMasterKey: true });
+    res.set("campaign_id", request.params.campaignId);
+    await res.save();
+    return res;
+  } catch (err) {
+    logger.error(`Error while getting user ${JSON.stringify(err)}`);
+    return false;
+  }
+});

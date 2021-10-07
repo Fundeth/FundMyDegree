@@ -93,3 +93,29 @@ export async function getUser() {
     console.log(`err while getting user ${err}`);
   }
 }
+
+export async function uploadCampaign(campaign) {
+  const file = new Moralis.File(campaign.id, {
+    base64: btoa(JSON.stringify(campaign)),
+  });
+  return file.saveIPFS();
+}
+
+export async function fetchCampaign(ipfsHash) {
+  const url = `https://ipfs.moralis.io:2053/ipfs/${ipfsHash}`;
+  const response = await fetch(url);
+  return response.json();
+}
+
+export async function saveCampaignId(campaignId) {
+  const params = {
+    campaignId: campaignId,
+  };
+  try {
+    const res = await Moralis.Cloud.run("addCampaign", params);
+    console.log(res);
+    return res;
+  } catch (err) {
+    console.log(`err while saving campaign id ${err}`);
+  }
+}

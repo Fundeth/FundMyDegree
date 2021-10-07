@@ -36,4 +36,12 @@ contract CampaignStorage {
 
     mapping (address => mapping(bytes32 => uint)) funderToCampaignIdToAmount;
 
+
+    function getCampaign(bytes32 campaignId) external view returns(Campaign memory){
+        return campaignIdToCampaign[campaignId];
+    }
+
+    function getAllCampaignIds() external view returns(bytes32[] memory){
+        return campaignIds;
+    }
 }

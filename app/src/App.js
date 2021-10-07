@@ -13,18 +13,19 @@ import ExploreCampaigns from "./pages/exploreCampaigns";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "./store";
-import { initContracts } from "./adapters/contracts";
+import { getCampaign, initContracts } from "./adapters/contracts";
 import { useMoralis } from "react-moralis";
 import { getUser } from "./adapters/MoralisAdapter";
+import { useSelector } from "react-redux";
 
 const App = () => {
   const dispatch = useDispatch();
-  const { setCampaignContract, setProfile, setLoading } = bindActionCreators(
-    actionCreators,
-    dispatch
+  const { setCampaignContract, setProfile, setLoading, setCampaign } =
+    bindActionCreators(actionCreators, dispatch);
+  const campaignContract = useSelector(
+    (state) => state.contract.campaignContract
   );
   const { isAuthenticated } = useMoralis();
-
   useEffect(() => {
     if (isAuthenticated) {
       setLoading(true);
@@ -35,6 +36,11 @@ const App = () => {
       getUser().then((user) => {
         console.log(user);
         setProfile(user);
+        getCampaign(campaignContract, user.get("campaign_id")).then((res) => {
+          console.log(res);
+          //setCampaign(res);
+        });
+
         setLoading(false);
       });
     }

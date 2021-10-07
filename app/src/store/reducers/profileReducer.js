@@ -25,6 +25,7 @@ const reducer = (
     publicView: null,
     privateView: null,
     readOnly: true,
+    campaign: null,
   },
   action
 ) => {

@@ -24,16 +24,29 @@ export async function createCampaign(
   selectionDeadline,
   verificationDeadline,
   target,
-  acceptanceDays,
   info
 ) {
+  console.log(selectionDeadline);
+  console.log(verificationDeadline);
+  console.log(`info ${info}`);
+
   const tx = await contract.start(
     college,
     selectionDeadline,
     verificationDeadline,
-    target,
-    acceptanceDays,
+    toEther(target.toString()),
     info
   );
+
   return tx.wait();
+}
+
+export async function healthCheck(contract) {
+  const health = await contract.health();
+  return health;
+}
+
+export async function getCampaign(contract, campaignId) {
+  console.log(`campaignId ${campaignId}`);
+  return contract.getCampaign(campaignId);
 }

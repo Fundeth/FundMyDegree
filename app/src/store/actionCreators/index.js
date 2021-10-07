@@ -240,6 +240,15 @@ export const setProfile = (user) => {
   };
 };
 
+export const setCampaign = (campaign) => {
+  return (dispatch) => {
+    dispatch({
+      type: "campaign",
+      payload: campaign,
+    });
+  };
+};
+
 export const setLoading = (loading) => {
   return (dispatch) => {
     dispatch({

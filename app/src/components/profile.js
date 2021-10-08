@@ -64,11 +64,11 @@ const Profile = (props) => {
       </div>
       <div className="flex flex-row mb-2">
         <div className="flex mr-4 text-sm items-end w-1/12">Degree: </div>
-        <div className="mr-4 text-xl">Bachelor's in Psychology</div>
+        <div className="mr-4 text-xl">Bachelor's in {props.major}</div>
       </div>
       <div className="flex flex-row  mb-8">
         <div className="flex mr-4 text-sm items-end w-1/12">College: </div>
-        <div className="flex flex-row text-xl mr-4">Purdue University</div>
+        <div className="flex flex-row text-xl mr-4">{props.school}</div>
         <a href={"https://www.purdue.edu/"} target="_blank" rel="noreferrer">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -89,17 +89,7 @@ const Profile = (props) => {
       <div className="mb-4 font-bold text-green-600 text-lg text-left">
         Why me?
       </div>
-      <div className="flex-1 mb-16 text-left">
-        It is a long established fact that a reader will be distracted by the
-        readable content of a page when looking at its layout. The point of
-        using Lorem Ipsum is that it has a more-or-less normal distribution of
-        letters, as opposed to using 'Content here, content here', making it
-        look like readable English. Many desktop publishing packages and web
-        page editors now use Lorem Ipsum as their default model text, and a
-        search for 'lorem ipsum' will uncover many web sites still in their
-        infancy. Various versions have evolved over the years, sometimes by
-        accident, sometimes on purpose (injected humour and the like).
-      </div>
+      <div className="flex-1 mb-16 text-left">{props.description}</div>
       <div className="flex flex-row items-center justify-center">
         {!readOnly && (
           <button className="w-48 bg-green-600 text-white rounded-full py-3 px-3 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none">

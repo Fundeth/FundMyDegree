@@ -32,16 +32,21 @@ const App = () => {
 
       initContracts().then((res) => {
         setCampaignContract(res.campaignContract);
-      });
-      getUser().then((user) => {
-        console.log(user);
-        setProfile(user);
-        getCampaign(campaignContract, user.get("campaign_id")).then((res) => {
-          console.log(res);
-          //setCampaign(res);
-        });
+        getUser().then((user) => {
+          console.log(user);
+          //console.log(campaignContract);
 
-        setLoading(false);
+          setProfile(user);
+          /*
+          getCampaign(res.campaignContract, user.get("campaign_id")).then(
+            (res) => {
+              console.log(res);
+              setCampaign(res);
+            }
+          );*/
+
+          setLoading(false);
+        });
       });
     }
   }, [isAuthenticated]);

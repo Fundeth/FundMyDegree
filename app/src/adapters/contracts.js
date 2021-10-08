@@ -48,5 +48,5 @@ export async function healthCheck(contract) {
 
 export async function getCampaign(contract, campaignId) {
   console.log(`campaignId ${campaignId}`);
-  //return contract.getCampaign(campaignId);
+  return contract.getCampaign(campaignId);
 }

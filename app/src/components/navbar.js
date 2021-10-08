@@ -3,7 +3,7 @@ import AnchorLink from "react-anchor-link-smooth-scroll";
 import logo from "../images/logo.png";
 import { useMoralis } from "react-moralis";
 import { formatAddress } from "../utils/utils";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { getUser } from "../adapters/MoralisAdapter";
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -20,11 +20,13 @@ const Navbar = () => {
   } = useMoralis();
 
   const history = useHistory();
+  const location = useLocation();
   const dispatch = useDispatch();
   const { setProfile, setLoading } = bindActionCreators(
     actionCreators,
     dispatch
   );
+  const profile = useSelector((state) => state.profile.publicView);
 
   return (
     <nav
@@ -113,6 +115,42 @@ const Navbar = () => {
                 }}
               >
                 I am an university
+              </button>
+            </div>
+          )}
+          {location.pathname === "/editProfile" && (
+            <div>
+              <button
+                class="block mt-4 lg:inline-block lg:mt-0 text-black mr-4 transform transition duration-500 ease-linear hover:scale-105"
+                onClick={() => {
+                  history.push(`/studentProfile/${profile?.get("ethAddress")}`);
+                }}
+              >
+                View Profile
+              </button>
+            </div>
+          )}
+          {location.pathname === "/" && (
+            <div>
+              <button
+                class="block mt-4 lg:inline-block lg:mt-0 text-black mr-4 transform transition duration-500 ease-linear hover:scale-105"
+                onClick={() => {
+                  history.push(`/studentProfile/${profile?.get("ethAddress")}`);
+                }}
+              >
+                View Profile
+              </button>
+            </div>
+          )}
+          {location.pathname.includes("/studentProfile/") && (
+            <div>
+              <button
+                class="block mt-4 lg:inline-block lg:mt-0 text-black mr-4 transform transition duration-500 ease-linear hover:scale-105"
+                onClick={() => {
+                  history.push(`/`);
+                }}
+              >
+                Explore campaigns
               </button>
             </div>
           )}

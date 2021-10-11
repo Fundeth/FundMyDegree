@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../store/index";
 
-const Accreditation = () => {
+const Accreditation = (props) => {
     const dispatch = useDispatch();
     const { updateAccreditation } = bindActionCreators(actionCreators, dispatch);
     const profile = useSelector((state) => state.profile);
@@ -18,10 +18,10 @@ const Accreditation = () => {
                     <div className="ml-2 flex flex-row text-sm">School Accreditation</div>
 
                     <input
-                        value={profile.schoolAccreditation}
+                        value={props.accreditation}
                         autoFocus                        
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
-                        onChange={(evt) => updateAccreditation(evt.target.value)}
+                        onChange={(evt) => props.setAccreditation(evt.target.value)}
                     ></input>
                 </div>
             </div>       

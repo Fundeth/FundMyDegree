@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../store/index";
 
-const BasicInfoSchool = () => {
+const BasicInfoSchool = (props) => {
     const dispatch = useDispatch();
     const { updateFirstName, updateSchoolPhone, updateEmail,updateWebsite } = bindActionCreators(actionCreators, dispatch);
     const profile = useSelector((state) => state.profile);
@@ -12,16 +12,7 @@ const BasicInfoSchool = () => {
     const url = document.getElementById("url");
     const tel = document.getElementById("tel");
     
-    /*const updatePageFirstName  = (firstname) => {
-        var errorMessage = "";
-        updateFirstName(firstname);
-        console.log("outside");
-        if((profile.firstName == "")){
-            console.log("inside");
-            errorMessage = "Please fill up School Name";         
-            alert(errorMessage);
-        }
-    }*/
+    
 
     /*if(url!==null){
         url.addEventListener('input', function (event) {});}
@@ -57,10 +48,10 @@ const BasicInfoSchool = () => {
                         type="text"
                         id="firstName" 
                         name="firstName"
-                        value={profile.firstName}
+                        value={props.firstName}
                         autoFocus
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"                    
-                        onChange={(evt) => updateFirstName(evt.target.value)}
+                        onChange={(evt) => props.setFirstName(evt.target.value)}
                     ></input>
                 </div>
                 <div className="flex flex-col w-1/4 mr-8">
@@ -70,11 +61,11 @@ const BasicInfoSchool = () => {
                         type="url"
                         id="url" 
                         name="url"
-                        value={profile.website}
+                        value={props.website}
                         autoFocus
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"                        
                         minLength="10"
-                        onChange={(evt) => updateWebsite(evt.target.value)}
+                        onChange={(evt) => props.setWebsite(evt.target.value)}
                     ></input>
                 </div>
             </div>
@@ -86,11 +77,11 @@ const BasicInfoSchool = () => {
                         type="email"
                         id="email" 
                         name="email"
-                        value={profile.email}
+                        value={props.email}
                         autoFocus
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"                        
                         minLength="10"
-                        onChange={(evt) => updateEmail(evt.target.value)}
+                        onChange={(evt) => props.setEmail(evt.target.value)}
                     ></input>
                 </div>
                 <div className="flex flex-col w-1/4 mr-8">
@@ -100,11 +91,11 @@ const BasicInfoSchool = () => {
                         type="tel"
                         id="tel" 
                         name="tel"                
-                        value={profile.schoolphone}
+                        value={props.schoolphone}
                         autoFocus
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"                        
                         minLength="10"
-                        onChange={(evt) => updateSchoolPhone(evt.target.value)}
+                        onChange={(evt) => props.setschoolphone(evt.target.value)}
                     ></input>
                 </div>
             </div>            

@@ -231,6 +231,15 @@ export const updateSchoolPhone = (schoolphone) => {
   };
 };
 
+export const updateflag = (flag) => {
+  return (dispatch) => {
+    dispatch({
+      type: "flag",
+      payload: flag,
+    });
+  };
+};
+
 export const setProfile = (user) => {
   return (dispatch) => {
     dispatch({
@@ -240,6 +249,14 @@ export const setProfile = (user) => {
   };
 };
 
+export const updateErrorMessage = (errorMessage) => {
+  return (dispatch) => {
+    dispatch({
+      type: "errorMessage",
+      payload: errorMessage,
+    });
+  };
+};
 export const setCampaign = (campaign) => {
   return (dispatch) => {
     dispatch({

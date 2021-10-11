@@ -9,7 +9,7 @@ import "./openzeppelin/SafeERC20.sol";
 contract Campaign is CampaignStorage {
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
-    event CampaignCreation(bytes32 campaignId);
+    event CampaignCreation(bytes32 indexed campaignId, address indexed campaignOwner);
 
     address private tokenAddress;
     constructor(address _tokenAddress) {
@@ -82,7 +82,7 @@ contract Campaign is CampaignStorage {
         );
         campaignIds.push(campaignId);
         campaignIdToCampaign[campaignId] = campaign;
-        emit CampaignCreation(campaignId);
+        emit CampaignCreation(campaignId, msg.sender);
         return campaignId;
     }
 

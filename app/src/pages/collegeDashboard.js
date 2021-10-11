@@ -1,4 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actionCreators } from "../store";
+import { getUser } from "../adapters/MoralisAdapter";
+import { Link, useLocation, useParams, useHistory } from "react-router-dom";
 
 const CollegeDashboard = () => {
   const [students, setStudents] = useState([
@@ -6,12 +11,45 @@ const CollegeDashboard = () => {
     { name: "Shimona Lahiri", amount: 5000 },
     { name: "Shahana Lahiri", amount: 1200 },
   ]);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const loading = useSelector((state) => state.loading.loading);
+  const profile = useSelector((state) => state.profile.publicView);
+  const { setProfile, setLoading } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
 
+  useEffect(() => {
+    if (!loading) {
+      if (!profile) {
+        setLoading(true);
+        getUser().then((user) => {
+          console.log(user);
+          setProfile(user);
+          setLoading(false);
+        });
+      }
+    }
+  }, []);
   return (
     <div className="flex flex-col w-screen  ml-16">
-      <div className="font-bold text-green-600 text-xl mb-8 mr-16 mt-12">
-        College Dashboard
+      <div className="flex flex-row items-center mb-8 mt-12">
+        <div className="font-bold text-green-600 text-xl mr-16 ">
+          {profile?.get("first_name")}'s Dashboard
+        </div>
+        <div className="flex flex-row ">
+          <button
+            className="w-24 bg-white text-green-600 text-xs rounded-full py-1 px-1 border-1 border-green-600"
+            onClick={() => {
+              history.push("/editSchoolProfile");
+            }}
+          >
+            Edit Profile
+          </button>
+        </div>
       </div>
+
       <div className="flex flex-row ">
         <div className="flex flex-col w-3/5">
           <div className="font-bold text-black text-lg mb-4">

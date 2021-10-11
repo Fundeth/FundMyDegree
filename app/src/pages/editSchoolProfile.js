@@ -10,7 +10,7 @@ import ReviewSchool from "../components/forms/reviewSchool";
 import ContactSchool from "../components/forms/contactSchool";
 import { ValidateForm } from "../utils/utils";
 
-const CreateSchoolProfile = () => {
+const EditSchoolProfile = () => {
   const [page, setPage] = useState(0);
   const loading = useSelector((state) => state.loading.loading);
   const history = useHistory();
@@ -328,4 +328,4 @@ const CreateSchoolProfile = () => {
   );
 };
 
-export default CreateSchoolProfile;
+export default EditSchoolProfile;

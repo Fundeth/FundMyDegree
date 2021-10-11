@@ -8,7 +8,6 @@ import CreateCampaign from "./pages/createCampaign";
 import Campaign from "./pages/campaign";
 import CollegeDashboard from "./pages/collegeDashboard";
 import StudentProfile from "./pages/studentProfile";
-import CollegeProfile from "./pages/collegeProfile";
 import ExploreCampaigns from "./pages/exploreCampaigns";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -34,17 +33,7 @@ const App = () => {
         setCampaignContract(res.campaignContract);
         getUser().then((user) => {
           console.log(user);
-          //console.log(campaignContract);
-
           setProfile(user);
-          /*
-          getCampaign(res.campaignContract, user.get("campaign_id")).then(
-            (res) => {
-              console.log(res);
-              setCampaign(res);
-            }
-          );*/
-
           setLoading(false);
         });
       });
@@ -58,9 +47,6 @@ const App = () => {
         </Route>
         <Route exact path="/studentProfile/:id">
           <StudentProfile />
-        </Route>
-        <Route exact path="/collegeProfile/:id">
-          <CollegeProfile />
         </Route>
         <Route exact path="/collegeDashboard">
           <CollegeDashboard />

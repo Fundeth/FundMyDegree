@@ -130,18 +130,6 @@ const Navbar = () => {
               </button>
             </div>
           )}
-          {location.pathname === "/" && (
-            <div>
-              <button
-                class="block mt-4 lg:inline-block lg:mt-0 text-black mr-4 transform transition duration-500 ease-linear hover:scale-105"
-                onClick={() => {
-                  history.push(`/studentProfile/${profile?.get("ethAddress")}`);
-                }}
-              >
-                View Profile
-              </button>
-            </div>
-          )}
           {location.pathname.includes("/studentProfile/") && (
             <div>
               <button

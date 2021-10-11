@@ -71,7 +71,8 @@ export async function insertSchool(
   schoolContact,
   schoolContactEmail,
   schoolContactPhone,
-  accreditation) {
+  accreditation
+) {
   const params = {
     metamask_id: "7777777777777777",
     first_name: firstName,
@@ -93,7 +94,7 @@ export async function insertSchool(
     contact_person_phone: schoolContactPhone,
     accreditation: accreditation,
     phone: schoolphone,
-    ethAddress: "jyhgwdwkd768868777"
+    ethAddress: "jyhgwdwkd768868777",
   };
 
   return Moralis.Cloud.run("insertSchool", params);
@@ -102,6 +103,16 @@ export async function insertSchool(
 export async function getUser() {
   try {
     const res = await Moralis.Cloud.run("getUser");
+    console.log(res);
+    return res;
+  } catch (err) {
+    console.log(`err while getting user ${err}`);
+  }
+}
+
+export async function getAllSchools() {
+  try {
+    const res = await Moralis.Cloud.run("getAllSchools");
     console.log(res);
     return res;
   } catch (err) {

@@ -134,20 +134,10 @@ Moralis.Cloud.define(
   "insertSchool",
   async (request) => {
     const query = new Moralis.Query("User_basic");
-    query.equalTo("metamask_id", request.params.metamask_id);
-    const querySchool = new Moralis.Query("School");
-    querySchool.equalTo("metamask_id", request.params.metamask_id);
+    query.equalTo("ethAddress", request.user.get("ethAddress"));
     const results = await query.first();
-    const resultsSchool = await querySchool.first();
-    if (results == null) {
-      const UserBasic = Moralis.Object.extend("User_basic");
-      const userBasic = new UserBasic();
-      const school = Moralis.Object.extend("School");
-      const schoolInfo = new school();
-      userBasic.set("metamask_id", request.params.metamask_id);
-      console.log(
-        "New object created with metamaskid: " + request.params.metamask_id
-      );
+    if (!results) {
+      const userBasic = new Moralis.Object("User_basic");
       userBasic.set("role", request.params.role);
       userBasic.set("first_name", request.params.first_name);
       userBasic.set("last_name", request.params.last_name);
@@ -162,37 +152,14 @@ Moralis.Cloud.define(
       userBasic.set("phone", request.params.phone);
       userBasic.set("ethAddress", request.user.get("ethAddress"));
 
-      //userBasic.set("campaign_id", request.params.campaign_id);
-      //start school info setter
       const object_contact_person = {
         name: request.params.contact_person,
         email: request.params.contact_person_email,
         phone: request.params.contact_person_phone,
       };
-      schoolInfo.set("metamask_id", request.params.metamask_id);
-      schoolInfo.set("accreditation", request.params.accreditation);
-      schoolInfo.set("contact_person", object_contact_person);
-      schoolInfo.set("ethAddress", request.user.get("ethAddress"));
-
-      const results = await Moralis.Object.saveAll([
-        userBasic,
-        schoolInfo,
-      ]).then(
-        (userBasic) => {
-          // Execute any logic that should take place after the object is saved.
-          console.log(
-            "New object created with objectId: " + userBasic.objectId
-          );
-          return userBasic;
-        },
-        (error) => {
-          // Execute any logic that should take place if the save fails.
-          // error is a Moralis.Error with an error code and message.
-          console.log(
-            "Failed to create new object, with error code: " + error.message
-          );
-        }
-      );
+      userBasic.set("accreditation", request.params.accreditation);
+      userBasic.set("contact_person", object_contact_person);
+      await Moralis.Object.saveAll([userBasic]);
     } else {
       results.set("first_name", request.params.first_name);
       results.set("last_name", request.params.last_name);
@@ -215,26 +182,9 @@ Moralis.Cloud.define(
         email: request.params.contact_person_email,
         phone: request.params.contact_person_phone,
       };
-      //schoolInfo.set("metamask_id", request.params.metamask_id);
-      resultsSchool.set("accreditation", request.params.accreditation);
-      resultsSchool.set("contact_person", object_contact_person);
-      const results2 = await Moralis.Object.saveAll([
-        results,
-        resultsSchool,
-      ]).then(
-        (results) => {
-          // Execute any logic that should take place after the object is saved.
-          console.log("object updated with objectId: " + results.objectId);
-          return results;
-        },
-        (error) => {
-          // Execute any logic that should take place if the save fails.
-          // error is a Moralis.Error with an error code and message.
-          console.log(
-            "Failed to update object, with error code: " + error.message
-          );
-        }
-      );
+      results.set("accreditation", request.params.accreditation);
+      results.set("contact_person", object_contact_person);
+      await Moralis.Object.saveAll([results]);
     }
   } /*{
   //fields : ['state'],
@@ -341,6 +291,23 @@ Moralis.Cloud.define("addCampaign", async (request) => {
     const res = await query.first({ useMasterKey: true });
     res.set("campaign_id", request.params.campaignId);
     await res.save();
+    return res;
+  } catch (err) {
+    logger.error(`Error while getting user ${JSON.stringify(err)}`);
+    return false;
+  }
+});
+
+Moralis.Cloud.define("getAllSchools", async (request) => {
+  const logger = Moralis.Cloud.getLogger();
+  const query = new Moralis.Query("User_basic");
+  query.equalTo("role", "school");
+  query.select("first_name", "ethAddress");
+
+  try {
+    const res = await query.find({ useMasterKey: true });
+
+    logger.info(`Found user ${JSON.stringify(res)}`);
     return res;
   } catch (err) {
     logger.error(`Error while getting user ${JSON.stringify(err)}`);

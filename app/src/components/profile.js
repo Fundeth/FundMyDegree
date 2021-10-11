@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import ReactTooltip from "react-tooltip";
 import dp1 from "../images/dp1.jpg";
 import { useSelector, useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 const Profile = (props) => {
   const profile = useSelector((state) => state.profile.publicView);
   const readOnly = useSelector((state) => state.profile.readOnly);
+  const location = useLocation();
 
   return (
     <div className="mb-16">
@@ -44,14 +46,11 @@ const Profile = (props) => {
       </div>
       <div className="mb-4">
         <span className="border-2 border-gray-600 rounded-full py-0.5 px-0.5 text-xs text-gray-600 ">
-          Verified
+          {profile?.get("verfiied") ? "Verified" : "Not verified"}
         </span>
       </div>
 
-      <div className="flex-1 text-xl mb-4 text-left">
-        I just wanna go to college man. Please fund my degree so I can become an
-        astronaut. Just another test line.
-      </div>
+      <div className="flex-1 text-xl mb-4 text-left">{props.oneLiner}</div>
       <div className="items-center mb-8">
         <img
           className="mr-4 h-96 w-144 items-center border-green-100 border-4 rounded-xl object-cover"
@@ -60,11 +59,13 @@ const Profile = (props) => {
       </div>
       <div className="flex flex-row mb-2">
         <div className="flex mr-4 text-sm items-end w-1/12">Year: </div>
-        <div className="mr-4 text-xl">2022</div>
+        <div className="mr-4 text-xl">{props.year}</div>
       </div>
       <div className="flex flex-row mb-2">
         <div className="flex mr-4 text-sm items-end w-1/12">Degree: </div>
-        <div className="mr-4 text-xl">Bachelor's in {props.major}</div>
+        <div className="mr-4 text-xl">
+          {props.degree} in {props.major}
+        </div>
       </div>
       <div className="flex flex-row  mb-8">
         <div className="flex mr-4 text-sm items-end w-1/12">College: </div>
@@ -91,12 +92,12 @@ const Profile = (props) => {
       </div>
       <div className="flex-1 mb-16 text-left">{props.description}</div>
       <div className="flex flex-row items-center justify-center">
-        {!readOnly && (
+        {profile?.get("ethAddress") === location.pathname.split("/")[2] && (
           <button className="w-48 bg-green-600 text-white rounded-full py-3 px-3 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none">
             Disburse
           </button>
         )}
-        {readOnly && (
+        {profile?.get("ethAddress") !== location.pathname.split("/")[2] && (
           <button className="w-48 bg-green-600 text-white rounded-full py-3 px-3 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none">
             Donate
           </button>

@@ -26,10 +26,6 @@ export async function createCampaign(
   target,
   info
 ) {
-  console.log(selectionDeadline);
-  console.log(verificationDeadline);
-  console.log(`info ${info}`);
-
   const tx = await contract.start(
     college,
     selectionDeadline,

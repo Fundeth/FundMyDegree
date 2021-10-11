@@ -5,13 +5,21 @@ import ReviewCampaign from "../components/forms/reviewCampaign";
 import SchoolInfo from "../components/forms/schoolInfo";
 import Paragraph from "../components/forms/paragraph";
 import { createCampaign, healthCheck } from "../adapters/contracts";
-import { useSelector } from "react-redux";
-import { uploadCampaign, saveCampaignId } from "../adapters/MoralisAdapter";
+import {
+  uploadCampaign,
+  saveCampaignId,
+  getAllSchools,
+  getUser,
+} from "../adapters/MoralisAdapter";
 import { useHistory } from "react-router";
+import { useSelector, useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actionCreators } from "../store";
 
 const CreateCampaign = () => {
   const history = useHistory();
   const [page, setPage] = useState(0);
+  const [schoolOptions, setSchoolOptions] = useState([]);
   const campaignContract = useSelector(
     (state) => state.contract.campaignContract
   );
@@ -24,12 +32,45 @@ const CreateCampaign = () => {
   const [studentId, setStudentId] = useState(campaign?.studentId);
   const [oneLiner, setOneLiner] = useState(campaign?.oneLiner);
   const [description, setDescription] = useState(campaign?.description);
-
+  const [degree, setDegree] = useState(campaign?.degree);
+  const [year, setYear] = useState(campaign?.year);
+  const loading = useSelector((state) => state.loading.loading);
+  const dispatch = useDispatch();
+  const { setLoading, setProfile } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
   function goNextPage() {
     setPage((page) => page + 1);
   }
   function goPreviousPage() {
     setPage((page) => page - 1);
+  }
+
+  useEffect(() => {
+    console.log("eieieieie");
+    setLoading(true);
+    let validSchools = [];
+    if (!profile) {
+      getUser().then((user) => {
+        console.log(user);
+        setProfile(user);
+      });
+    }
+    getAllSchools().then((schools) => {
+      console.log(schools);
+      schools.map((school) => {
+        validSchools.push({
+          value: school.get("ethAddress"),
+          label: school.get("first_name"),
+        });
+      });
+      setSchoolOptions(validSchools);
+      setLoading(false);
+    });
+  }, []);
+  if (loading) {
+    return <div>Loading...</div>;
   }
   return (
     <div className="flex flex-col w-screen">
@@ -47,10 +88,15 @@ const CreateCampaign = () => {
           {page === 0 && <Target target={target} setTarget={setTarget} />}
           {page === 1 && (
             <SchoolInfo
+              schoolOptions={schoolOptions}
               school={school}
               setSchool={setSchool}
               major={major}
               setMajor={setMajor}
+              degree={degree}
+              setDegree={setDegree}
+              year={year}
+              setYear={setYear}
               email={email}
               setEmail={setEmail}
               studentId={studentId}
@@ -141,17 +187,18 @@ const CreateCampaign = () => {
                       id: Date.now() + Math.random(),
                       school: school,
                       major: major,
+                      degree: degree,
+                      year: year,
                       email: email,
                       studentId: studentId,
                       oneLiner: oneLiner,
                       description: description,
                     }).then((res) => {
                       console.log(res.hash());
-                      console.log(campaignContract);
-
+                      console.log(school);
                       createCampaign(
                         campaignContract,
-                        "0xf4D70D2fd1DE59ff34aA0350263ba742cb94b1c8",
+                        school.value, //ethAddress
                         Date.parse("2022-03-19T20:23:01.804Z"),
                         Date.parse("2022-03-19T20:23:01.804Z"),
                         target,
@@ -167,6 +214,19 @@ const CreateCampaign = () => {
                             campaignId = event.args[0];
                           }
                         }
+                        console.log(`campaignId ${campaignId}`);
+                        /*
+                        let filterCampaign =
+                          campaignContract.filters.CampaignCreation(
+                            profile.get("ethAddress"),
+                            null
+                          );
+                        campaignContract
+                          .queryFilter(filterCampaign)
+                          .then((res) => {
+                            console.log(res);
+                          });
+                        */
                         saveCampaignId(campaignId).then(
                           history.push({
                             pathname: `/studentProfile/${profile.get(

@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import CreateProfile from "./pages/createProfile";
 import EditProfile from "./pages/editProfile";
 import CreateSchoolProfile from "./pages/createSchoolProfile";
+import EditSchoolProfile from "./pages/editSchoolProfile";
 import CreateCampaign from "./pages/createCampaign";
 import Campaign from "./pages/campaign";
 import CollegeDashboard from "./pages/collegeDashboard";
@@ -19,11 +20,11 @@ import { useSelector } from "react-redux";
 
 const App = () => {
   const dispatch = useDispatch();
-  const { setCampaignContract, setProfile, setLoading, setCampaign } =
-    bindActionCreators(actionCreators, dispatch);
-  const campaignContract = useSelector(
-    (state) => state.contract.campaignContract
+  const { setCampaignContract, setProfile, setLoading } = bindActionCreators(
+    actionCreators,
+    dispatch
   );
+
   const { isAuthenticated } = useMoralis();
   useEffect(() => {
     if (isAuthenticated) {
@@ -62,6 +63,9 @@ const App = () => {
         </Route>
         <Route exact path="/createSchoolProfile">
           <CreateSchoolProfile />
+        </Route>
+        <Route exact path="/editSchoolProfile">
+          <EditSchoolProfile />
         </Route>
         <Route exact path="/createCampaign">
           <CreateCampaign />

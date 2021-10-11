@@ -6,23 +6,29 @@ import { setCampaign } from "../store/actionCreators";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../store";
 import { fromWei } from "../utils/utils";
-import { fetchCampaign } from "../adapters/MoralisAdapter";
+import { fetchCampaign, getUser } from "../adapters/MoralisAdapter";
 
 const StudentProfile = () => {
   let { id } = useParams();
   const history = useHistory();
+  const location = useLocation();
+
   const dispatch = useDispatch();
-  const profile = useSelector((state) => state.profile.publicView);
   const loading = useSelector((state) => state.loading.loading);
   const campaignContract = useSelector(
     (state) => state.contract.campaignContract
   );
+  const { setProfile } = bindActionCreators(actionCreators, dispatch);
+  const profile = useSelector((state) => state.profile.publicView);
+
   const [localLoading, setLocalLoading] = useState(true);
 
   const [target, setTarget] = useState(0);
   const [received, setReceived] = useState(0);
-  const [school, setSchool] = useState("");
+  const [school, setSchool] = useState({});
   const [major, setMajor] = useState("");
+  const [degree, setDegree] = useState("");
+  const [year, setYear] = useState("");
   const [description, setDescription] = useState("");
   const [oneLiner, setOneLiner] = useState("");
 
@@ -30,8 +36,13 @@ const StudentProfile = () => {
     if (!loading) {
       console.log(campaignContract);
       console.log(profile);
-
       setLocalLoading(true);
+      if (!profile) {
+        getUser().then((user) => {
+          console.log(user);
+          setProfile(user);
+        });
+      }
       campaignContract.getCampaign(profile?.get("campaign_id")).then((res) => {
         console.log(res);
         console.log(res.target);
@@ -40,13 +51,17 @@ const StudentProfile = () => {
 
         fetchCampaign(res.info).then((res2) => {
           console.log(res2);
-          setSchool(res2.school);
+          setSchool(res2.school.label);
           setMajor(res2.major);
           setDescription(res2.description);
+          setDegree(res2.degree);
+          setYear(res2.year);
+          setOneLiner(res2.oneLiner);
         });
         setLocalLoading(false);
       });
     }
+    console.log(location);
   }, []);
 
   if (loading || localLoading) {
@@ -62,19 +77,24 @@ const StudentProfile = () => {
             description={description}
             school={school}
             major={major}
+            oneLiner={oneLiner}
+            degree={degree}
+            year={year}
           />
         </div>
         <div className="w-2/5  ">
-          <div className="flex flex-row items-center justify-center">
-            <button
-              className="w-32 bg-white text-green-600 rounded-full py-1 px-1 border-1 border-green-600"
-              onClick={() => {
-                history.push("/editProfile");
-              }}
-            >
-              Edit Profile
-            </button>
-          </div>
+          {profile?.get("ethAddress") === location.pathname.split("/")[2] && (
+            <div className="flex flex-row items-center justify-center">
+              <button
+                className="w-24 bg-white text-green-600 text-xs rounded-full py-1 px-1 border-1 border-green-600"
+                onClick={() => {
+                  history.push("/editProfile");
+                }}
+              >
+                Edit Profile
+              </button>
+            </div>
+          )}
           <div className="h-1/4 mt-32 mr-16 ml-16 border-1 shadow-xl sticky">
             <div className="flex flex-col text-center h-1/6"></div>
 
@@ -97,9 +117,18 @@ const StudentProfile = () => {
               <div className=""></div>
             </div>
             <div className="flex flex-col text-center items-center justify-end h-2/6">
-              <button className="w-48 bg-green-600 text-white rounded-full py-3 px-3 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none">
-                Donate
-              </button>
+              {profile?.get("ethAddress") !==
+                location.pathname.split("/")[2] && (
+                <button className="w-48 bg-green-600 text-white rounded-full py-3 px-3 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none">
+                  Donate
+                </button>
+              )}
+              {profile?.get("ethAddress") ===
+                location.pathname.split("/")[2] && (
+                <button className="w-48 bg-green-600 text-white rounded-full py-3 px-3 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none">
+                  Disburse
+                </button>
+              )}
             </div>
           </div>
         </div>

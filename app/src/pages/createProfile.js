@@ -207,7 +207,7 @@ const CreateProfile = () => {
                       });
                   }}
                 >
-                  Create Campaign
+                  Create Profile
                 </button>
               )}
             </div>

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../store/index";
 
-const ContactSchool = () => {
+const ContactSchool = (props) => {
     const dispatch = useDispatch();
     const { updateSchoolContact, updateSchoolContactEmail, updateSchoolContactPhone } = bindActionCreators(actionCreators, dispatch);
     const profile = useSelector((state) => state.profile);
@@ -26,10 +26,10 @@ const ContactSchool = () => {
                     <div className="ml-2 flex flex-row text-sm">Contact Person Name</div>
 
                     <input
-                        value={profile.schoolContact}
+                        value={props.schoolContact}
                         autoFocus                        
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
-                        onChange={(evt) => updateSchoolContact(evt.target.value)}
+                        onChange={(evt) => props.setSchoolContact(evt.target.value)}
                     ></input>
                 </div>
 
@@ -40,11 +40,11 @@ const ContactSchool = () => {
 
                     <input
                         type="email"
-                        value={profile.schoolContactEmail}
+                        value={props.schoolContactEmail}
                         autoFocus                        
                         minLength="10"
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
-                        onChange={(evt) => updateSchoolContactEmail(evt.target.value)}
+                        onChange={(evt) => props.setschoolContactEmail(evt.target.value)}
                     ></input>
                 </div>
 
@@ -54,10 +54,10 @@ const ContactSchool = () => {
                     <div className="ml-2 flex flex-row text-sm">Phone Number</div>
                     <input
                         type="tel"
-                        value={profile.schoolContactPhone}
+                        value={props.schoolContactPhone}
                         autoFocus                        
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
-                        onChange={(evt) => updateSchoolContactPhone(evt.target.value)}
+                        onChange={(evt) => props.setschoolContactPhone(evt.target.value)}
                     ></input>
                 </div>                
             </div>            

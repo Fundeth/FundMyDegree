@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../store/index";
 
-const ReviewSchool = () => {
+const ReviewSchool = (props) => {
     const profile = useSelector((state) => state.profile);
     return (
         <div>
@@ -17,7 +17,7 @@ const ReviewSchool = () => {
                         type="text"
                         id="firstName" 
                         name="firstName"
-                        value={profile.firstName}
+                        value={props.firstName}
                         autoFocus
                         required
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
@@ -29,7 +29,7 @@ const ReviewSchool = () => {
                 <div className="ml-2 flex flex-row text-sm">School website</div>
                      
                     <input
-                        value={profile.website}
+                        value={props.website}
                         autoFocus
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
                     ></input>
@@ -43,7 +43,7 @@ const ReviewSchool = () => {
                         type="email"
                         id="email" 
                         name="email"
-                        value={profile.email}
+                        value={props.email}
                         autoFocus
                         required
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
@@ -57,7 +57,7 @@ const ReviewSchool = () => {
                         type="tel"
                         id="tel" 
                         name="tel"
-                        value={profile.schoolphone}
+                        value={props.schoolphone}
                         autoFocus
                         required
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
@@ -73,7 +73,7 @@ const ReviewSchool = () => {
                         type="text"
                         id="address1" 
                         name="address1"
-                        value={profile.address1}
+                        value={props.address1}
                         autoFocus
                         required
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
@@ -86,7 +86,7 @@ const ReviewSchool = () => {
                 <div className="ml-2 flex flex-row text-sm">Address 2</div>
 
                     <input
-                        value={profile.address2}
+                        value={props.address2}
                         autoFocus
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
                     ></input>
@@ -100,7 +100,7 @@ const ReviewSchool = () => {
                         type="text"
                         id="city" 
                         name="city"
-                        value={profile.city}
+                        value={props.city}
                         autoFocus
                         required
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
@@ -112,7 +112,7 @@ const ReviewSchool = () => {
                         type="text"
                         id="state" 
                         name="state"
-                        value={profile.state}
+                        value={props.state}
                         autoFocus
                         required
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
@@ -127,7 +127,7 @@ const ReviewSchool = () => {
                         type="text"
                         id="postal" 
                         name="postal"
-                        value={profile.postalCode}
+                        value={props.postalCode}
                         autoFocus
                         required
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
@@ -139,7 +139,7 @@ const ReviewSchool = () => {
                         type="text"
                         id="country" 
                         name="country"
-                        value={profile.country}
+                        value={props.country}
                         autoFocus
                         required
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
@@ -153,7 +153,7 @@ const ReviewSchool = () => {
                         type="text"
                         id="schoolContact" 
                         name="schoolContact"
-                        value={profile.schoolContact}
+                        value={props.schoolContact}
                         autoFocus
                         required
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
@@ -165,7 +165,7 @@ const ReviewSchool = () => {
                         type="email"
                         id="emailContact" 
                         name="emailContact"
-                        value={profile.schoolContactEmail}
+                        value={props.schoolContactEmail}
                         autoFocus
                         required
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
@@ -179,7 +179,7 @@ const ReviewSchool = () => {
                         type="text"
                         id="contactPhone" 
                         name="contactPhone"
-                        value={profile.schoolContactPhone}
+                        value={props.schoolContactPhone}
                         autoFocus
                         required
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
@@ -193,7 +193,7 @@ const ReviewSchool = () => {
                         type="text"
                         id="accreditation" 
                         name="accreditation"
-                        value={profile.schoolAccreditation}
+                        value={props.accreditation}
                         autoFocus
                         required
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"

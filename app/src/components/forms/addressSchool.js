@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../store/index";
 
-const AddressSchool = () => {
+const AddressSchool = (props) => {
     const dispatch = useDispatch();
     const { updateAddress, updateAddress2, updateCity, updateState, updateCountry, updatePostalCode } = bindActionCreators(actionCreators, dispatch);
     const profile = useSelector((state) => state.profile);
@@ -18,10 +18,10 @@ const AddressSchool = () => {
                     <div className="ml-2 flex flex-row text-sm">Address 1</div>
 
                     <input
-                        value={profile.address1}
+                        value={props.address1}
                         autoFocus                        
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
-                        onChange={(evt) => updateAddress(evt.target.value)}
+                        onChange={(evt) => props.setAddress1(evt.target.value)}
                     ></input>
                 </div>
 
@@ -31,10 +31,10 @@ const AddressSchool = () => {
                     <div className="ml-2 flex flex-row text-sm">Address 2</div>
 
                     <input
-                        value={profile.address2}
+                        value={props.address2}
                         autoFocus
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
-                        onChange={(evt) => updateAddress2(evt.target.value)}
+                        onChange={(evt) => props.setAddress2(evt.target.value)}
                     ></input>
                 </div>
 
@@ -43,19 +43,19 @@ const AddressSchool = () => {
                 <div className="flex flex-col w-1/4 mr-8">
                     <div className="ml-2 flex flex-row text-sm">City</div>
                     <input
-                        value={profile.city}
+                        value={props.city}
                         autoFocus                        
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
-                        onChange={(evt) => updateCity(evt.target.value)}
+                        onChange={(evt) => props.setCity(evt.target.value)}
                     ></input>
                 </div>
                 <div className="flex flex-col w-1/4 ml-8">
                     <div className="ml-2 flex flex-row text-sm">State</div>
                     <input
-                        value={profile.state}
+                        value={props.state}
                         autoFocus                        
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
-                        onChange={(evt) => updateState(evt.target.value)}
+                        onChange={(evt) => props.setState(evt.target.value)}
                     ></input>
                 </div>
             </div>
@@ -63,19 +63,19 @@ const AddressSchool = () => {
                 <div className="flex flex-col w-1/4 mr-8">
                     <div className="ml-2 flex flex-row text-sm">Postal Code</div>
                     <input
-                        value={profile.postalCode}
+                        value={props.postalCode}
                         autoFocus                        
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
-                        onChange={(evt) => updatePostalCode(evt.target.value)}
+                        onChange={(evt) => props.setPostalCode(evt.target.value)}
                     ></input>
                 </div>
                 <div className="flex flex-col w-1/4 ml-8">
                     <div className="ml-2 flex flex-row text-sm">Country</div>
                     <input
-                        value={profile.country}
+                        value={props.country}
                         autoFocus                        
                         className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
-                        onChange={(evt) => updateCountry(evt.target.value)}
+                        onChange={(evt) => props.setCountry(evt.target.value)}
                     ></input>
                 </div>
             </div>

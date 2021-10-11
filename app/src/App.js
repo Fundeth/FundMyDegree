@@ -36,10 +36,10 @@ const App = () => {
       getUser().then((user) => {
         console.log(user);
         setProfile(user);
-        getCampaign(campaignContract, user.get("campaign_id")).then((res) => {
+    /*    getCampaign(campaignContract, user.get("campaign_id")).then((res) => {
           console.log(res);
           //setCampaign(res);
-        });
+        });*/
 
         setLoading(false);
       });

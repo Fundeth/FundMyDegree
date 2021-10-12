@@ -310,7 +310,7 @@ const CreateSchoolProfile = () => {
                     )
                       .then((res) => {
                         console.log(`res on creation ${res}`);
-                        //history.push("/createCampaign");
+                        history.push("/collegeDashboard");
                       })
                       .catch((err) => {
                         console.log(`error ${err}`);

@@ -6,7 +6,6 @@ import EditProfile from "./pages/editProfile";
 import CreateSchoolProfile from "./pages/createSchoolProfile";
 import EditSchoolProfile from "./pages/editSchoolProfile";
 import CreateCampaign from "./pages/createCampaign";
-import Campaign from "./pages/campaign";
 import CollegeDashboard from "./pages/collegeDashboard";
 import StudentProfile from "./pages/studentProfile";
 import ExploreCampaigns from "./pages/exploreCampaigns";
@@ -51,9 +50,6 @@ const App = () => {
         </Route>
         <Route exact path="/collegeDashboard">
           <CollegeDashboard />
-        </Route>
-        <Route exact path="/campaign/:id">
-          <Campaign />
         </Route>
         <Route exact path="/createProfile">
           <CreateProfile />

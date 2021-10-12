@@ -5,23 +5,22 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 const Profile = (props) => {
-  const profile = useSelector((state) => state.profile.publicView);
-  const readOnly = useSelector((state) => state.profile.readOnly);
   const location = useLocation();
-
+  const profile = useSelector((state) => state.profile.publicView);
   return (
     <div className="mb-16">
       <div className="flex flex-row mb-1">
         <div className="w-4/5">
           <span className="text-green-600 font-bold text-3xl text-left">
-            {profile?.get("first_name")} {profile?.get("last_name")}
+            {props.profilePublicView?.get("first_name")}{" "}
+            {props.profilePublicView?.get("last_name")}
           </span>
         </div>
         <div className="flex w-1/5 align-right float-right">
           <a
             className="flex hover:text-green-600 text-black items-center"
             target="_blank"
-            href={profile?.get("linkedIn")}
+            href={props.profilePublicView?.get("linkedIn")}
             rel="noreferrer"
           >
             <i className="fab fa-linkedin mx-4" />
@@ -29,7 +28,7 @@ const Profile = (props) => {
           <a
             className="flex hover:text-green-600 items-center"
             target="_blank"
-            href={profile?.get("website")}
+            href={props.profilePublicView?.get("website")}
             rel="noreferrer"
           >
             <i className="fab fa-firefox-browser mx-4" />
@@ -37,7 +36,7 @@ const Profile = (props) => {
           <a
             className="flex hover:text-green-600 items-center"
             target="_blank"
-            href={profile?.get("portfolio")}
+            href={props.profilePublicView?.get("portfolio")}
             rel="noreferrer"
           >
             <i class="fas fa-portrait mx-4"></i>
@@ -46,7 +45,9 @@ const Profile = (props) => {
       </div>
       <div className="mb-4">
         <span className="border-2 border-gray-600 rounded-full py-0.5 px-0.5 text-xs text-gray-600 ">
-          {profile?.get("verfiied") ? "Verified" : "Not verified"}
+          {props.profilePublicView?.get("verfiied")
+            ? "Verified"
+            : "Not verified"}
         </span>
       </div>
 
@@ -69,7 +70,7 @@ const Profile = (props) => {
       </div>
       <div className="flex flex-row  mb-8">
         <div className="flex mr-4 text-sm items-end w-1/12">College: </div>
-        <div className="flex flex-row text-xl mr-4">{props.school}</div>
+        <div className="flex flex-row text-xl mr-4">{props.school?.label}</div>
         <a href={"https://www.purdue.edu/"} target="_blank" rel="noreferrer">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -93,12 +94,22 @@ const Profile = (props) => {
       <div className="flex-1 mb-16 text-left">{props.description}</div>
       <div className="flex flex-row items-center justify-center">
         {profile?.get("ethAddress") === location.pathname.split("/")[2] && (
-          <button className="w-48 bg-green-600 text-white rounded-full py-3 px-3 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none">
+          <button
+            className="w-48 bg-green-600 text-white rounded-full py-3 px-3 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
+            onClick={() => {
+              props.setShowDisburseModal(true);
+            }}
+          >
             Disburse
           </button>
         )}
         {profile?.get("ethAddress") !== location.pathname.split("/")[2] && (
-          <button className="w-48 bg-green-600 text-white rounded-full py-3 px-3 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none">
+          <button
+            className="w-48 bg-green-600 text-white rounded-full py-3 px-3 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
+            onClick={() => {
+              props.setShowDonateModal(true);
+            }}
+          >
             Donate
           </button>
         )}

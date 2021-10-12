@@ -42,7 +42,8 @@ export async function healthCheck(contract) {
   return health;
 }
 
-export async function getCampaign(contract, campaignId) {
-  console.log(`campaignId ${campaignId}`);
-  return contract.getCampaign(campaignId);
+export async function getCampaign(contract, student) {
+  console.log(`address of student ${student}`);
+  console.log(`hohohohohohohhohohohoohohhoohohohooo`);
+  return contract.getCampaign(student);
 }

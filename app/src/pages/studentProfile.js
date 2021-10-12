@@ -6,22 +6,23 @@ import { setCampaign } from "../store/actionCreators";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../store";
 import { fromWei } from "../utils/utils";
-import { fetchCampaign, getUser } from "../adapters/MoralisAdapter";
+import { fetchCampaign, getUserProfile } from "../adapters/MoralisAdapter";
+import DisburseModal from "../components/disburseModal";
+import DonateModal from "../components/donateModal";
 
 const StudentProfile = () => {
-  let { id } = useParams();
   const history = useHistory();
   const location = useLocation();
+  const [profilePublicView, setProfilePublicView] = useState(null);
+  const [showDonateModal, setShowDonateModal] = useState(false);
+  const [showDisburseModal, setShowDisburseModal] = useState(false);
 
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.loading.loading);
   const campaignContract = useSelector(
     (state) => state.contract.campaignContract
   );
-  const { setProfile } = bindActionCreators(actionCreators, dispatch);
   const profile = useSelector((state) => state.profile.publicView);
-
-  const [localLoading, setLocalLoading] = useState(true);
 
   const [target, setTarget] = useState(0);
   const [received, setReceived] = useState(0);
@@ -33,57 +34,51 @@ const StudentProfile = () => {
   const [oneLiner, setOneLiner] = useState("");
 
   useEffect(() => {
-    if (!loading) {
-      console.log(campaignContract);
-      console.log(profile);
-      setLocalLoading(true);
-      if (!profile) {
-        getUser().then((user) => {
-          console.log(user);
-          setProfile(user);
-        });
-      }
-      campaignContract.getCampaign(profile?.get("campaign_id")).then((res) => {
-        console.log(res);
-        console.log(res.target);
+    getUserProfile(location.pathname.split("/")[2]).then((user) => {
+      console.log(user);
+      setProfilePublicView(user);
+    });
+  }, []);
+
+  useEffect(() => {
+    campaignContract
+      .getCampaign(location.pathname.split("/")[2])
+      .then((res) => {
+        console.log(`res from contract ${JSON.stringify(res)}`);
         setTarget(parseInt(fromWei(res.target)));
         setReceived(parseInt(fromWei(res.received)));
 
         fetchCampaign(res.info).then((res2) => {
-          console.log(res2);
-          setSchool(res2.school.label);
+          console.log(`res2: ${JSON.stringify(res2)}`);
+          setSchool(res2.school);
           setMajor(res2.major);
           setDescription(res2.description);
           setDegree(res2.degree);
           setYear(res2.year);
           setOneLiner(res2.oneLiner);
         });
-        setLocalLoading(false);
       });
-    }
-    console.log(location);
   }, []);
-
-  if (loading || localLoading) {
-    return <div>Loading</div>;
-  }
 
   return (
     <div className="flex flex-col w-screen">
       <div className="flex flex-row ml-16 mr-16 mt-12">
         <div className="w-3/5">
           <Profile
-            profileId={id}
+            profilePublicView={profilePublicView}
             description={description}
             school={school}
             major={major}
             oneLiner={oneLiner}
             degree={degree}
             year={year}
+            setShowDisburseModal={setShowDisburseModal}
+            setShowDonateModal={setShowDonateModal}
           />
         </div>
         <div className="w-2/5  ">
-          {profile?.get("ethAddress") === location.pathname.split("/")[2] && (
+          {profilePublicView?.get("ethAddress") ===
+            location.pathname.split("/")[2] && (
             <div className="flex flex-row items-center justify-center">
               <button
                 className="w-24 bg-white text-green-600 text-xs rounded-full py-1 px-1 border-1 border-green-600"
@@ -119,13 +114,19 @@ const StudentProfile = () => {
             <div className="flex flex-col text-center items-center justify-end h-2/6">
               {profile?.get("ethAddress") !==
                 location.pathname.split("/")[2] && (
-                <button className="w-48 bg-green-600 text-white rounded-full py-3 px-3 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none">
+                <button
+                  className="w-48 bg-green-600 text-white rounded-full py-3 px-3 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
+                  onClick={() => setShowDonateModal(true)}
+                >
                   Donate
                 </button>
               )}
               {profile?.get("ethAddress") ===
                 location.pathname.split("/")[2] && (
-                <button className="w-48 bg-green-600 text-white rounded-full py-3 px-3 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none">
+                <button
+                  className="w-48 bg-green-600 text-white rounded-full py-3 px-3 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
+                  onClick={() => setShowDisburseModal(true)}
+                >
                   Disburse
                 </button>
               )}
@@ -133,6 +134,14 @@ const StudentProfile = () => {
           </div>
         </div>
       </div>
+      <DisburseModal
+        showDisburseModal={showDisburseModal}
+        setShowDisburseModal={setShowDisburseModal}
+      />
+      <DonateModal
+        showDonateModal={showDonateModal}
+        setShowDonateModal={setShowDonateModal}
+      />
     </div>
   );
 };

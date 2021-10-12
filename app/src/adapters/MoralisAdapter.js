@@ -110,6 +110,19 @@ export async function getUser() {
   }
 }
 
+export async function getUserProfile(ethAddress) {
+  try {
+    const params = {
+      ethAddress: ethAddress,
+    };
+    const res = await Moralis.Cloud.run("getUserProfile", params);
+    console.log(res);
+    return res;
+  } catch (err) {
+    console.log(`err while getting user ${err}`);
+  }
+}
+
 export async function getAllSchools() {
   try {
     const res = await Moralis.Cloud.run("getAllSchools");
@@ -133,13 +146,30 @@ export async function fetchCampaign(ipfsHash) {
   return response.json();
 }
 
-export async function saveCampaignId(campaignId) {
+export async function saveCampaign(school, major, oneLiner, degree, target) {
   const params = {
-    campaignId: campaignId,
+    school: school,
+    major: major,
+    oneLiner: oneLiner,
+    degree: degree,
+    target: target,
   };
   try {
     const res = await Moralis.Cloud.run("addCampaign", params);
     console.log(res);
+    return res;
+  } catch (err) {
+    console.log(`err while saving campaign id ${err}`);
+  }
+}
+
+export async function getActiveCampaigns(college, major) {
+  const params = {
+    college: college,
+    major: major,
+  };
+  try {
+    const res = await Moralis.Cloud.run("getActiveCampaigns", params);
     return res;
   } catch (err) {
     console.log(`err while saving campaign id ${err}`);

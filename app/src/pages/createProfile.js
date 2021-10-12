@@ -35,10 +35,6 @@ const CreateProfile = () => {
     setPage((page) => page - 1);
   }
 
-  if (loading) {
-    return <div>Loading</div>;
-  }
-
   if (profile) {
     history.push("/editProfile");
   }

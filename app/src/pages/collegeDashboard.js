@@ -11,6 +11,11 @@ const CollegeDashboard = () => {
     { name: "Shimona Lahiri", amount: 5000 },
     { name: "Shahana Lahiri", amount: 1200 },
   ]);
+  const [receivedAmounts, setReceivedAmounts] = useState([
+    { name: "Aditya Chakraborty", amount: 3000 },
+    { name: "Shimona Lahiri", amount: 0 },
+    { name: "Shahana Lahiri", amount: 5000 },
+  ]);
   const dispatch = useDispatch();
   const history = useHistory();
   const loading = useSelector((state) => state.loading.loading);
@@ -53,7 +58,7 @@ const CollegeDashboard = () => {
       <div className="flex flex-row ">
         <div className="flex flex-col w-3/5">
           <div className="font-bold text-black text-lg mb-4">
-            Pending Verifications - {`${students.length}`}
+            Pending Approvals - {`${students.length}`}
           </div>
           <div className="border-1 shadow-lg">
             <div className="flex flex-row mt-4 border-b-2">
@@ -97,18 +102,55 @@ const CollegeDashboard = () => {
           </div>
         </div>
       </div>
+      <div className="flex flex-row mt-16">
+        <div className="flex flex-col w-3/5">
+          <div className="font-bold text-black text-lg mb-4">
+            Received funds
+          </div>
+          <div className="border-1 shadow-lg">
+            <div className="flex flex-row mt-4 border-b-2">
+              <div class="w-1/2">
+                <div className="flex flex-col items-start justify-center ml-2 mb-4 font-semibold">
+                  Student name
+                </div>
+              </div>
+              <div class="w-1/2">
+                <div className="flex flex-col items-start justify-center mb-4 font-semibold">
+                  Received Amount
+                </div>
+              </div>
+            </div>
+            {receivedAmounts.map((receivedAmount) => {
+              return (
+                <div className="flex flex-row h-12 items-center  border-b-1">
+                  <div class="w-1/2">
+                    <div className="flex flex-col items-start justify-center ml-2">
+                      {receivedAmount.name}
+                    </div>
+                  </div>
+                  <div class="w-1/4">
+                    <div className="flex flex-col items-start justify-center">
+                      {`$${receivedAmount.amount}`}
+                    </div>
+                  </div>
+                  <div class="w-1/4">
+                    <div className="flex flex-col items-center justify-center">
+                      <button
+                        class="w-24 bg-green-600 text-white rounded-full py-1 px-1 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
+                        type="button"
+                      >
+                        Details
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default CollegeDashboard;
-
-/*{props.proposal.user[0].skills?.map((skill) => {
-  return (
-    <div className="">
-      <span className="hidden lg:flex text-xs bg-blue-100 text-blue-500 flex flex-col justify-center px-2 py mr-2">
-        {skill.value}
-      </span>
-    </div>
-  );
-})}*/

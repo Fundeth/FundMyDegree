@@ -7,7 +7,7 @@ import Paragraph from "../components/forms/paragraph";
 import { createCampaign, healthCheck } from "../adapters/contracts";
 import {
   uploadCampaign,
-  saveCampaignId,
+  saveCampaign,
   getAllSchools,
   getUser,
 } from "../adapters/MoralisAdapter";
@@ -205,29 +205,13 @@ const CreateCampaign = () => {
                         res.hash()
                       ).then((res2) => {
                         console.log(res2);
-                        let campaignId;
-                        for (const event of res2.events) {
-                          if (
-                            event.event &&
-                            event.event === "CampaignCreation"
-                          ) {
-                            campaignId = event.args[0];
-                          }
-                        }
-                        console.log(`campaignId ${campaignId}`);
-                        /*
-                        let filterCampaign =
-                          campaignContract.filters.CampaignCreation(
-                            profile.get("ethAddress"),
-                            null
-                          );
-                        campaignContract
-                          .queryFilter(filterCampaign)
-                          .then((res) => {
-                            console.log(res);
-                          });
-                        */
-                        saveCampaignId(campaignId).then(
+                        saveCampaign(
+                          school,
+                          major,
+                          oneLiner,
+                          degree,
+                          target
+                        ).then(
                           history.push({
                             pathname: `/studentProfile/${profile.get(
                               "ethAddress"

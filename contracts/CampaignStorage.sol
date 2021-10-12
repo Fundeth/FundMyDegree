@@ -10,7 +10,6 @@ contract CampaignStorage {
         bool locked;
         bool collegeVerificationReceived;
         address college;
-        address student;
         Installment currentInstallment;
         Deadline deadline;
         string info;
@@ -29,19 +28,13 @@ contract CampaignStorage {
         uint amount;
     }
 
-    bytes32[] internal campaignIds;
-    mapping (bytes32 => Campaign) internal campaignIdToCampaign;
+    mapping (address => Campaign) internal studentToCampaign;
 
-    mapping (address => bool) internal collegeToVerified;
-
-    mapping (address => mapping(bytes32 => uint)) funderToCampaignIdToAmount;
+    mapping (address => mapping(address => uint)) funderToCampaignToAmount;
 
 
-    function getCampaign(bytes32 campaignId) external view returns(Campaign memory){
-        return campaignIdToCampaign[campaignId];
+    function getCampaign(address student) external view returns(Campaign memory){
+        return studentToCampaign[student];
     }
 
-    function getAllCampaignIds() external view returns(bytes32[] memory){
-        return campaignIds;
-    }
 }

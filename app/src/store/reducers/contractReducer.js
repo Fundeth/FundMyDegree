@@ -1,6 +1,7 @@
 const reducer = (
   state = {
     campaignContract: {},
+    tokenContract: {},
   },
   action
 ) => {

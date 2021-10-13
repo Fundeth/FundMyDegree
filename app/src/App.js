@@ -19,22 +19,18 @@ import { useSelector } from "react-redux";
 
 const App = () => {
   const dispatch = useDispatch();
-  const { setCampaignContract, setProfile, setLoading } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  const { setCampaignContract, setProfile, setLoading, setTokenContract } =
+    bindActionCreators(actionCreators, dispatch);
 
   const { isAuthenticated } = useMoralis();
   useEffect(() => {
     if (isAuthenticated) {
-      setLoading(true);
-
       initContracts().then((res) => {
         setCampaignContract(res.campaignContract);
+        setTokenContract(res.tokenContract);
         getUser().then((user) => {
           console.log(user);
           setProfile(user);
-          setLoading(false);
         });
       });
     }

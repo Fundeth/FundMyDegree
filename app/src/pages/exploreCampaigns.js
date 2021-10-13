@@ -32,7 +32,7 @@ const ExploreCampaigns = () => {
   }
   return (
     <div>
-      <div className="flex bg-beige w-full h-72">
+      <div className="flex bg-white w-full h-72">
         <div className="flex flex-col w-1/2 items-end justify-center text-md tracking-wider">
           <div className="flex flex-row text-3xl font-bold mb text-right">
             College has never been

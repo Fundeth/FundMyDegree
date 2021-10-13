@@ -186,6 +186,16 @@ export const setCampaignContract = (contract) => {
     });
   };
 };
+
+export const setTokenContract = (contract) => {
+  return (dispatch) => {
+    dispatch({
+      type: "tokenContract",
+      payload: contract,
+    });
+  };
+};
+
 export const updateSchoolContact = (schoolContact) => {
   return (dispatch) => {
     dispatch({

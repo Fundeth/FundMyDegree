@@ -5,6 +5,7 @@ import { useMoralis } from "react-moralis";
 import { formatAddress } from "../utils/utils";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { getUser } from "../adapters/MoralisAdapter";
+import { mintFMDToken } from "../adapters/contracts";
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../store/index";
@@ -27,10 +28,11 @@ const Navbar = () => {
     dispatch
   );
   const profile = useSelector((state) => state.profile.publicView);
+  const tokenContract = useSelector((state) => state.contract.tokenContract);
 
   return (
     <nav
-      className="flex justify-between items-center h-16 text-black mx-auto px-4 bg-beige sticky top-0 z-10 bg-clip-padding shadow-lg"
+      className="flex justify-between items-center h-16 text-black mx-auto px-4 bg-white sticky top-0 z-10 bg-clip-padding shadow-lg"
       role="navigation"
     >
       <Link to="/">
@@ -54,7 +56,7 @@ const Navbar = () => {
           />
         </svg>
       </div>
-      <div class="md:hidden sm:hidden w-full block flex-grow lg:flex lg:w-auto items-center justify-end pr-8">
+      <div class="flex-row md:hidden sm:hidden w-full block flex-grow lg:flex lg:w-auto items-center justify-end pr-8">
         <div class="text-sm lg:flex-grow">
           {!isAuthenticated && (
             <div>
@@ -143,7 +145,7 @@ const Navbar = () => {
             </div>
           )}
         </div>
-        <button
+        {/*<button
           class="py-4 px-1 relative border-2 border-transparent text-gray-800 rounded-full hover:text-green-900 focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out"
           aria-label="Notification"
         >
@@ -161,7 +163,25 @@ const Navbar = () => {
               d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
             />
           </svg>
-        </button>
+        </button>*/}
+        <div>
+          <button
+            class="block mt-4 lg:inline-block lg:mt-0 text-black mr-4 transform transition duration-500 ease-linear hover:scale-105 text-sm "
+            onClick={() => {
+              if (!isAuthenticated) {
+                authenticate().then(() => {
+                  console.log(`hi`);
+                  console.log(tokenContract);
+                  mintFMDToken(tokenContract);
+                });
+              } else {
+                mintFMDToken(tokenContract);
+              }
+            }}
+          >
+            Mint Test token
+          </button>
+        </div>
         {!isAuthenticating && !isAuthenticated && (
           <div>
             <button

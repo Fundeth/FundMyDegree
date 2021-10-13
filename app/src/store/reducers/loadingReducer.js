@@ -1,6 +1,6 @@
 const reducer = (
   state = {
-    loading: true,
+    loading: false,
   },
   action
 ) => {

@@ -1,5 +1,7 @@
 import campaignAddress from "../contracts/campaign-address.json";
 import campaignABI from "../contracts/Campaign.json";
+import tokenAddress from "../contracts/token-address.json";
+import tokenABI from "../contracts/Token.json";
 import { toEther } from "../utils/utils";
 
 const ethers = require("ethers");
@@ -15,7 +17,17 @@ export async function initContracts() {
     campaignABI.abi,
     provider.getSigner()
   );
-  return { campaignContract };
+  let tokenContract = new ethers.Contract(
+    tokenAddress.FMDToken,
+    tokenABI.abi,
+    provider.getSigner()
+  );
+  return { campaignContract, tokenContract };
+}
+
+export async function mintFMDToken(contract) {
+  console.log(contract);
+  return contract.mintOnlyOnceAtWill();
 }
 
 export async function createCampaign(

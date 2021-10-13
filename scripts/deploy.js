@@ -1,23 +1,37 @@
 const hre = require("hardhat");
 
 async function main() {
-  const tokenAddress = "0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada"
+  const FMDToken = await ethers.getContractFactory("FMDToken");
+  const fmdToken = await FMDToken.deploy();
+  await fmdToken.deployed();
+  console.log("FMDToken deployed to: ", fmdToken.address);
+
   const Campaign = await ethers.getContractFactory("Campaign");
-  const campaign = await Campaign.deploy(tokenAddress);
+  const campaign = await Campaign.deploy(fmdToken.address);
   await campaign.deployed();
   console.log("Campaign deployed to: ", campaign.address);
 
-  saveFrontendFiles(campaign);
-
+  saveFrontendFiles(campaign, fmdToken);
 }
 
-function saveFrontendFiles(campaign) {
+function saveFrontendFiles(campaign, fmdToken) {
   const fs = require("fs");
   const contractsDir = __dirname + "/../app/src/contracts";
 
   if (!fs.existsSync(contractsDir)) {
     fs.mkdirSync(contractsDir);
   }
+  fs.writeFileSync(
+    contractsDir + "/token-address.json",
+    JSON.stringify({ FMDToken: fmdToken.address }, undefined, 2)
+  );
+
+  const FMDTokenArtifact = artifacts.readArtifactSync("FMDToken");
+
+  fs.writeFileSync(
+    contractsDir + "/Token.json",
+    JSON.stringify(FMDTokenArtifact, undefined, 2)
+  );
 
   fs.writeFileSync(
     contractsDir + "/campaign-address.json",

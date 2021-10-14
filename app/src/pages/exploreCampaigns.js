@@ -12,12 +12,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../store";
 import { setCampaign } from "../store/actionCreators";
+import teaching from "../images/Teaching-amico.png";
 
 const ExploreCampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
-  const campaignContract = useSelector(
-    (state) => state.contract.campaignContract
-  );
+
   const loading = useSelector((state) => state.loading.loading);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -52,6 +51,10 @@ const ExploreCampaigns = () => {
               Create a campaign
             </button>
           </div>
+        </div>
+        <div className="flex items-center w-1/2 ml-16">
+          {" "}
+          <img src={teaching} className="h-72" />
         </div>
       </div>
       <div className="flex flex-row mt-16 ml-16 mr-16">

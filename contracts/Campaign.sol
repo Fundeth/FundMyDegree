@@ -5,6 +5,7 @@ import "hardhat/console.sol";
 import "./CampaignStorage.sol";
 import "./openzeppelin/IERC20.sol";
 import "./openzeppelin/SafeERC20.sol";
+import "./openzeppelin/Safemath.sol";
 
 contract Campaign is CampaignStorage {
     using SafeMath for uint256;
@@ -32,10 +33,7 @@ contract Campaign is CampaignStorage {
      * @dev This is called at the start of a campaign by the student.
      **/
     function start(address college, uint collegeSelectionDeadline, uint collegeVerificationDeadline, uint target, string memory info) external returns (bytes32) {
-        Installment memory installment = Installment(
-            false,
-            0
-        );
+
         Deadline memory deadline = Deadline(
             collegeSelectionDeadline,
             collegeVerificationDeadline
@@ -45,7 +43,7 @@ contract Campaign is CampaignStorage {
             true,
             false,
             college,
-            installment,
+            0,
             deadline,
             info,
             target,
@@ -73,7 +71,7 @@ contract Campaign is CampaignStorage {
      * @dev This is called by the college that was selected by the student to verify that the student was accepted for college.
      **/
     function verify(address student) external onlyCampaignCollege(student) {
-        studentToCampaign[student].collegeVerificationReceived = true;
+        studentToCampaign[student].pendingVerification = false;
     }
 
     /**
@@ -83,9 +81,10 @@ contract Campaign is CampaignStorage {
     function fund(address student, uint amount) external {
         require(amount <= studentToCampaign[student].target, "Funding amount overshoots target");
 
-        studentToCampaign[student].received.add(amount);
-        studentToCampaign[student].balance.add(amount);
-
+        //studentToCampaign[student].received.add(amount);
+        //studentToCampaign[student].balance.add(amount);
+        studentToCampaign[student].received = studentToCampaign[student].received + amount;
+        studentToCampaign[student].balance = studentToCampaign[student].balance + amount;
         funderToCampaignToAmount[msg.sender][student] = amount;
 
         IERC20(tokenAddress).safeTransferFrom(msg.sender, address(this), amount);
@@ -95,26 +94,20 @@ contract Campaign is CampaignStorage {
     /**
      * @dev This is called by the college to set the next installment amount
      **/
-    function setInstallment(address student, uint amount) external onlyCampaignCollege(student) {
-        studentToCampaign[student].currentInstallment.amount = amount;
+    function setInstallmentAmount(uint amount) external {
+        require(amount <= studentToCampaign[msg.sender].balance, "Installment amount higher than balance");
+        studentToCampaign[msg.sender].installmentAmount = studentToCampaign[msg.sender].installmentAmount + amount;
     }
-
-    /**
-     * @dev This is called by the student to verify that the next installment to be withdrawn by the college is correct
-     **/
-    function verifyInstallment(address student) external {
-        studentToCampaign[student].currentInstallment.studentApproval = true;
-    }
-
 
     /**
      * @dev This is called by the college to withdraw an installment once verified
      **/
     function withdrawInstallment(address student, uint amount) external onlyCampaignCollege(student) {
-        require (studentToCampaign[student].currentInstallment.studentApproval == true);
+        require(amount <= studentToCampaign[student].installmentAmount, "Withdrawal amount higher than disbursed amount");
+        require(amount <= studentToCampaign[student].balance, "Withdrawal amount higher than balance");
 
-        studentToCampaign[student].balance.sub(amount);
-
+        studentToCampaign[student].balance = studentToCampaign[student].balance - amount;
+        studentToCampaign[msg.sender].installmentAmount = studentToCampaign[msg.sender].installmentAmount - amount;
         IERC20(tokenAddress).safeTransferFrom(address(this), msg.sender, amount);
     }
 

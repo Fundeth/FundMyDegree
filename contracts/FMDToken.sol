@@ -4,7 +4,7 @@ import "./openzeppelin/ERC20.sol";
 
 contract FMDToken is ERC20 {
     address deployerAddress;
-    constructor() ERC20("Demo Spect", "DSpect"){
+    constructor() ERC20("Fund My Degree Token", "FMDToken"){
         deployerAddress = msg.sender;
         _mint(msg.sender, 1_000_000_000_000_000_000_000_000); //1 Billion
     }

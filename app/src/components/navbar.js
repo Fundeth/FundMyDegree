@@ -29,7 +29,6 @@ const Navbar = () => {
   );
   const profile = useSelector((state) => state.profile.publicView);
   const tokenContract = useSelector((state) => state.contract.tokenContract);
-
   return (
     <nav
       className="flex justify-between items-center h-16 text-black mx-auto px-4 bg-white sticky top-0 z-10 bg-clip-padding shadow-lg"

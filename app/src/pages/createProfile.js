@@ -27,6 +27,9 @@ const CreateProfile = () => {
   const [website, setWebsite] = useState(profile?.get("website"));
   const [linkedIn, setLinkedIn] = useState(profile?.get("linkedIn"));
   const [portfolio, setPortfolio] = useState(profile?.get("portfolio_link"));
+  const [profilePicture, setProfilePicture] = useState(
+    profile?.get("cropped_pic")
+  );
 
   function goNextPage() {
     setPage((page) => page + 1);
@@ -47,7 +50,6 @@ const CreateProfile = () => {
             formType="Create Profile"
             fieldGroups={[
               "Basic Info",
-              "Profile Picture",
               "Address",
               "Education",
               "Portfolio",
@@ -67,9 +69,11 @@ const CreateProfile = () => {
               setLastName={setLastName}
               email={email}
               setEmail={setEmail}
+              profilePicture={profilePicture}
+              setProfilePicture={setProfilePicture}
             />
           )}
-          {page === 2 && (
+          {page === 1 && (
             <Address
               address1={address1}
               setAddress1={setAddress1}
@@ -85,13 +89,13 @@ const CreateProfile = () => {
               setPostalCode={setPostalCode}
             />
           )}
-          {page === 3 && (
+          {page === 2 && (
             <Education
               educationLevel={educationLevel}
               setEducationLevel={setEducationLevel}
             />
           )}
-          {page === 4 && (
+          {page === 3 && (
             <Portfolio
               website={website}
               setWebsite={setWebsite}
@@ -101,7 +105,7 @@ const CreateProfile = () => {
               setPortfolio={setPortfolio}
             />
           )}
-          {page === 5 && (
+          {page === 4 && (
             <Review
               firstName={firstName}
               setFirstName={setFirstName}
@@ -154,7 +158,7 @@ const CreateProfile = () => {
             </div>
 
             <div className="flex flex-col w-1/3 items-center">
-              {page !== 5 && page !== 0 && (
+              {page !== 4 && page !== 0 && (
                 <button
                   class="w-32 bg-green-600 text-white rounded-full py-3 px-6 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
                   type="button"
@@ -164,7 +168,7 @@ const CreateProfile = () => {
                 </button>
               )}
 
-              {page !== 5 && page === 0 && (
+              {page !== 4 && page === 0 && (
                 <button
                   class="w-32 bg-green-600 text-white rounded-full py-3 px-6 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
                   type="button"
@@ -174,7 +178,7 @@ const CreateProfile = () => {
                 </button>
               )}
 
-              {page === 5 && (
+              {page === 4 && (
                 <button
                   class="w-48 bg-green-600 text-white rounded-full py-3 px-6 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
                   type="button"
@@ -192,7 +196,8 @@ const CreateProfile = () => {
                       educationLevel,
                       website,
                       linkedIn,
-                      portfolio
+                      portfolio,
+                      profilePicture
                     )
                       .then((res) => {
                         console.log(`res on creation ${res}`);

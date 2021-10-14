@@ -27,7 +27,7 @@ export async function insertUserBasic(
   website,
   linkedIn,
   portfolio,
-  profilePictureDimensions
+  cropped_pic
 ) {
   const params = {
     metamask_id: "5555555555",
@@ -45,7 +45,7 @@ export async function insertUserBasic(
     portfolio_link: portfolio,
     linkedIn: linkedIn,
     website: website,
-    photo_dimension: profilePictureDimensions,
+    cropped_pic: cropped_pic,
   };
   return await Moralis.Cloud.run("insertUserBasic", params);
 }
@@ -174,4 +174,18 @@ export async function getActiveCampaigns(college, major) {
   } catch (err) {
     console.log(`err while saving campaign id ${err}`);
   }
+}
+
+export async function getActiveStudents() {
+  try {
+    const res = await Moralis.Cloud.run("getActiveStudents");
+    return res;
+  } catch (err) {
+    console.log(`err while saving campaign id ${err}`);
+  }
+}
+
+export async function uploadFile(data) {
+  const file = new Moralis.File(data.name, data);
+  return file.saveIPFS();
 }

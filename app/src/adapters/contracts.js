@@ -2,7 +2,7 @@ import campaignAddress from "../contracts/campaign-address.json";
 import campaignABI from "../contracts/Campaign.json";
 import tokenAddress from "../contracts/token-address.json";
 import tokenABI from "../contracts/Token.json";
-import { toEther } from "../utils/utils";
+import { toEther, fromWei } from "../utils/utils";
 
 const ethers = require("ethers");
 
@@ -49,13 +49,38 @@ export async function createCampaign(
   return tx.wait();
 }
 
-export async function healthCheck(contract) {
-  const health = await contract.health();
-  return health;
-}
-
 export async function getCampaign(contract, student) {
   console.log(`address of student ${student}`);
-  console.log(`hohohohohohohhohohohoohohhoohohohooo`);
   return contract.getCampaign(student);
+}
+
+export async function donate(contract, student, amount) {
+  console.log(`address of student ${student}`);
+  const tx = await contract.fund(student, toEther(amount.toString()));
+
+  return tx.wait();
+}
+
+export async function disburse(contract, amount) {
+  const tx = await contract.setInstallmentAmount(toEther(amount.toString()));
+
+  return tx.wait();
+}
+
+export async function withdrawInstallment(contract, student, amount) {
+  console.log(`address of student ${student}`);
+  const tx = await contract.withdrawInstallment(
+    student,
+    toEther(amount.toString())
+  );
+
+  return tx.wait();
+}
+
+export async function balanceOf(contract, address) {
+  console.log(`balance of ${address}`);
+  contract.balanceOf(address).then((res) => {
+    console.log(parseInt(fromWei(res)));
+    return res;
+  });
 }

@@ -11,7 +11,7 @@ const ProfileCard = (props) => {
           <div className="items-center mb-4">
             <img
               className="mr-4 h-56 w-96 items-center border-green-100 rounded-t-xl object-cover"
-              src={dp1}
+              src={props.campaign.get("cropped_pic")}
             ></img>
           </div>
           <div class="px-4">
@@ -90,7 +90,7 @@ const ProfileCard = (props) => {
                   d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"
                 />
               </svg>
-              <p class="ml-2">{props.campaign.get("school")}</p>
+              <p class="ml-2">{props.campaign.get("school").label}</p>
             </div>
           </div>
         </div>

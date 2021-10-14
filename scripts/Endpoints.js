@@ -29,6 +29,7 @@ Moralis.Cloud.define("insertUserBasic", async (request) => {
     userBasic.set("portfolio_link", request.params.portfolio_link);
     userBasic.set("phone", request.params.phone);
     userBasic.set("ethAddress", request.user.get("ethAddress"));
+    userBasic.set("cropped_pic", request.user.cropped_pic);
 
     try {
       await userBasic.save();
@@ -55,6 +56,7 @@ Moralis.Cloud.define("insertUserBasic", async (request) => {
     results.set("photo_dimension", request.params.photo_dimension);
     results.set("portfolio_link", request.params.portfolio_link);
     results.set("phone", request.params.phone);
+    results.set("cropped_pic", request.user.cropped_pic);
 
     try {
       await results.save();
@@ -275,6 +277,39 @@ Moralis.Cloud.define("getActiveCampaigns", async (request) => {
   try {
     const res = await query.find();
     return res;
+  } catch (err) {
+    logger.error(`Error while getting active campaigns ${err}`);
+    return false;
+  }
+});
+
+Moralis.Cloud.define("getActiveStudents", async (request) => {
+  const logger = Moralis.Cloud.getLogger();
+  const query = new Moralis.Query("User_basic");
+  query.equalTo("active", true);
+  //query.exists("campaign_id");
+
+  query.select(
+    "first_name",
+    "last_name",
+    "cropped_pic",
+    "college_id",
+    "ethAddress",
+    "degree",
+    "major",
+    "school",
+    "target",
+    "oneLiner"
+  );
+  try {
+    const res = await query.find();
+    const filteredStudents = [];
+    for (var student of res) {
+      if (student.get("school").value === request.user.get("ethAddress")) {
+        filteredStudents.push(student);
+      }
+    }
+    return filteredStudents;
   } catch (err) {
     logger.error(`Error while getting active campaigns ${err}`);
     return false;

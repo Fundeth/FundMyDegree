@@ -8,9 +8,9 @@ contract CampaignStorage {
     struct Campaign {
         bool active;
         bool locked;
-        bool collegeVerificationReceived;
+        bool pendingVerification;
         address college;
-        Installment currentInstallment;
+        uint installmentAmount;
         Deadline deadline;
         string info;
         uint target;
@@ -21,11 +21,6 @@ contract CampaignStorage {
     struct Deadline {
         uint collegeSelectionDeadline;
         uint collegeVerificationDeadline;
-    }
-
-    struct Installment {
-        bool studentApproval;
-        uint amount;
     }
 
     mapping (address => Campaign) internal studentToCampaign;

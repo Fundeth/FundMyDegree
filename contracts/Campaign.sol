@@ -107,7 +107,7 @@ contract Campaign is CampaignStorage {
         require(amount <= studentToCampaign[student].balance, "Withdrawal amount higher than balance");
 
         studentToCampaign[student].balance = studentToCampaign[student].balance - amount;
-        studentToCampaign[msg.sender].installmentAmount = studentToCampaign[msg.sender].installmentAmount - amount;
+        studentToCampaign[student].installmentAmount = studentToCampaign[student].installmentAmount - amount;
         IERC20(tokenAddress).safeTransferFrom(address(this), msg.sender, amount);
     }
 

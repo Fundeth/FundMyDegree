@@ -11,6 +11,7 @@ import { getCampaign } from "../adapters/contracts";
 import { Link, useLocation, useParams, useHistory } from "react-router-dom";
 import { fromWei } from "../utils/utils";
 import VerificationModal from "../components/verificationModal";
+import { initContracts, balanceOf } from "../adapters/contracts";
 
 const CollegeDashboard = () => {
   const [students, setStudents] = useState([]);
@@ -23,10 +24,8 @@ const CollegeDashboard = () => {
   const history = useHistory();
   const loading = useSelector((state) => state.loading.loading);
   const profile = useSelector((state) => state.profile.publicView);
-  const { setProfile, setLoading } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  const { setProfile, setLoading, setCampaignContract, setTokenContract } =
+    bindActionCreators(actionCreators, dispatch);
   const campaignContract = useSelector(
     (state) => state.contract.campaignContract
   );
@@ -39,61 +38,74 @@ const CollegeDashboard = () => {
         console.log(`gettting active students`);
       });
     }
-    getActiveStudents().then((activeStudents) => {
-      console.log(activeStudents);
-      let studentArray = [];
-      let receivedCount = 0;
-      let disbursedCount = 0;
-      activeStudents.map((activeStudent) => {
-        let activeStudentObj = {
-          amount: 0,
-          receivedAmount: 0,
-          name: "",
-          ethAddress: "",
-          major: "",
-          degree: "",
-          studentId: "",
-          email: "",
-        };
-        console.log(`getting campaign for ${activeStudent.get("ethAddress")}`);
-        activeStudentObj.name = `${activeStudent.get(
-          "first_name"
-        )} ${activeStudent.get("last_name")}`;
-        activeStudentObj.ethAddress = activeStudent.get("ethAddress");
-        getCampaign(campaignContract, activeStudent.get("ethAddress"))
-          .then((res) => {
-            console.log(parseInt(fromWei(res.balance)));
-            console.log(parseInt(fromWei(res.installmentAmount)));
 
-            activeStudentObj.amount = parseInt(fromWei(res.installmentAmount));
-            activeStudentObj.receivedAmount = parseInt(
-              fromWei(res.received - res.balance)
-            );
-            fetchCampaign(res.info).then((res2) => {
-              console.log(`res2: ${JSON.stringify(res2)}`);
-              activeStudentObj.major = res2.major;
-              activeStudentObj.degree = res2.degree;
-              activeStudentObj.studentId = res2.studentId;
-              activeStudentObj.email = res2.email;
+    if (campaignContract !== {}) {
+      getActiveStudents().then((activeStudents) => {
+        console.log(activeStudents);
+        let studentArray = [];
+        let receivedCount = 0;
+        let disbursedCount = 0;
+        activeStudents.map((activeStudent) => {
+          let activeStudentObj = {
+            amount: 0,
+            receivedAmount: 0,
+            name: "",
+            ethAddress: "",
+            major: "",
+            degree: "",
+            studentId: "",
+            email: "",
+            profile_pic: "",
+          };
+          console.log(
+            `getting campaign for ${activeStudent.get("ethAddress")}`
+          );
+          activeStudentObj.name = `${activeStudent.get(
+            "first_name"
+          )} ${activeStudent.get("last_name")}`;
+          activeStudentObj.ethAddress = activeStudent.get("ethAddress");
+          activeStudentObj.profile_pic = activeStudent.get("cropped_pic");
+
+          getCampaign(campaignContract, activeStudent.get("ethAddress"))
+            .then((res) => {
+              console.log(parseInt(fromWei(res.balance)));
+              console.log(parseInt(fromWei(res.installmentAmount)));
+              activeStudentObj.amount = parseInt(
+                fromWei(res.installmentAmount)
+              );
+              console.log("hshshshhs");
+
+              activeStudentObj.receivedAmount =
+                parseInt(fromWei(res.received)) -
+                parseInt(fromWei(res.balance));
+              console.log("hshshshhs");
+
+              fetchCampaign(res.info).then((res2) => {
+                console.log(`res2: ${JSON.stringify(res2)}`);
+                activeStudentObj.major = res2.major;
+                activeStudentObj.degree = res2.degree;
+                activeStudentObj.studentId = res2.studentId;
+                activeStudentObj.email = res2.email;
+              });
+
+              if (activeStudentObj.amount > 0) {
+                disbursedCount = disbursedCount + 1;
+              }
+              if (activeStudentObj.receivedAmount > 0) {
+                receivedCount = receivedCount + 1;
+              }
+
+              studentArray.push(activeStudentObj);
+            })
+            .finally((a) => {
+              setStudents(studentArray);
+              setNumDisbursed(disbursedCount);
+              setNumReceived(receivedCount);
             });
-
-            if (activeStudentObj.amount > 0) {
-              disbursedCount = disbursedCount + 1;
-            }
-            if (activeStudentObj.receivedAmount > 0) {
-              receivedCount = receivedCount + 1;
-            }
-
-            studentArray.push(activeStudentObj);
-          })
-          .finally((a) => {
-            setStudents(studentArray);
-            setNumDisbursed(disbursedCount);
-            setNumReceived(receivedCount);
-          });
+        });
       });
-    });
-  }, []);
+    }
+  }, [campaignContract]);
   return (
     <div className="flex flex-col w-screen  ml-16">
       <div className="flex flex-row items-center mb-8 mt-12">
@@ -234,6 +246,10 @@ const CollegeDashboard = () => {
         students={students}
         setStudents={setStudents}
         studentIdx={studentIdx}
+        numReceived={numReceived}
+        setNumReceived={setNumReceived}
+        numDisbursed={numDisbursed}
+        setNumDisbursed={setNumDisbursed}
       />
     </div>
   );

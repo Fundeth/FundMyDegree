@@ -30,7 +30,10 @@ const VerificationModal = (props) => {
                 </div>
                 {/*body*/}
                 <div className="items-center mb-4">
-                  <img className="h-64 w-96 object-cover" src={dp1}></img>
+                  <img
+                    className="h-64 w-96 object-cover"
+                    src={props.students[props.studentIdx].profile_pic}
+                  ></img>
                 </div>
                 <div className="flex flex-col ml-4 mr-4">
                   <div className="flex mb-2 flex-row">
@@ -101,15 +104,35 @@ const VerificationModal = (props) => {
                     className="w-32 bg-green-600 text-white rounded-full py-3 px-6 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
                     type="button"
                     onClick={() => {
-                      console.log(props.students[props.studentIdx].amount);
+                      console.log(
+                        `amount 1 ${props.students[props.studentIdx].amount}`
+                      );
                       withdrawInstallment(
                         campaignContract,
                         props.students[props.studentIdx].ethAddress,
                         props.students[props.studentIdx].amount
                       ).then((res) => {
-                        props.setStudents(
-                          props.students.splice(props.studentIdx, 1)
+                        let updatedStudent = props.students[props.studentIdx];
+                        updatedStudent.receivedAmount =
+                          updatedStudent.receivedAmount +
+                          props.students[props.studentIdx].amount;
+                        updatedStudent.amount = 0;
+
+                        console.log(
+                          `updatedStudent ${JSON.stringify(updatedStudent)}`
                         );
+                        props.students.splice(props.studentIdx, 1);
+                        console.log(
+                          `students 1 ${JSON.stringify(props.students)}`
+                        );
+
+                        props.students.push(updatedStudent);
+                        console.log(
+                          `students 2 ${JSON.stringify(props.students)}`
+                        );
+                        props.setStudents(props.students);
+                        props.setNumReceived(props.numReceived + 1);
+                        props.setNumDisbursed(props.numDisbursed - 1);
                         props.setShowVerificationModal(false);
                       });
                     }}

@@ -9,7 +9,7 @@ import { fromWei } from "../utils/utils";
 import { fetchCampaign, getUserProfile } from "../adapters/MoralisAdapter";
 import DisburseModal from "../components/disburseModal";
 import DonateModal from "../components/donateModal";
-import { balanceOf } from "../adapters/contracts";
+import { initContracts } from "../adapters/contracts";
 
 const StudentProfile = () => {
   const history = useHistory();
@@ -23,12 +23,8 @@ const StudentProfile = () => {
   const campaignContract = useSelector(
     (state) => state.contract.campaignContract
   );
-  const tokenContract = useSelector((state) => state.contract.tokenContract);
-  console.log(tokenContract);
-  console.log(
-    balanceOf(tokenContract, "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707")
-  );
   const profile = useSelector((state) => state.profile.publicView);
+  const { setCampaignContract } = bindActionCreators(actionCreators, dispatch);
 
   const [target, setTarget] = useState(0);
   const [received, setReceived] = useState(0);
@@ -47,25 +43,50 @@ const StudentProfile = () => {
   }, []);
 
   useEffect(() => {
-    campaignContract
-      .getCampaign(location.pathname.split("/")[2])
-      .then((res) => {
-        console.log(`res from contract ${JSON.stringify(res)}`);
-        console.log(`received ${parseInt(res.received)}`);
+    if (Object.keys(campaignContract).length !== 0) {
+      campaignContract
+        .getCampaign(location.pathname.split("/")[2])
+        .then((res) => {
+          console.log(`res from contract ${JSON.stringify(res)}`);
+          console.log(`received ${parseInt(res.received)}`);
 
-        setTarget(parseInt(fromWei(res.target)));
-        setReceived(parseInt(fromWei(res.received)));
+          setTarget(parseInt(fromWei(res.target)));
+          setReceived(parseInt(fromWei(res.received)));
 
-        fetchCampaign(res.info).then((res2) => {
-          console.log(`res2: ${JSON.stringify(res2)}`);
-          setSchool(res2.school);
-          setMajor(res2.major);
-          setDescription(res2.description);
-          setDegree(res2.degree);
-          setYear(res2.year);
-          setOneLiner(res2.oneLiner);
+          fetchCampaign(res.info).then((res2) => {
+            console.log(`res2: ${JSON.stringify(res2)}`);
+            setSchool(res2.school);
+            setMajor(res2.major);
+            setDescription(res2.description);
+            setDegree(res2.degree);
+            setYear(res2.year);
+            setOneLiner(res2.oneLiner);
+          });
         });
+    } else {
+      initContracts().then((res) => {
+        console.log(res);
+        res.campaignContract
+          .getCampaign(location.pathname.split("/")[2])
+          .then((res) => {
+            console.log(`res from contract ${JSON.stringify(res)}`);
+            console.log(`received ${parseInt(res.received)}`);
+
+            setTarget(parseInt(fromWei(res.target)));
+            setReceived(parseInt(fromWei(res.received)));
+
+            fetchCampaign(res.info).then((res2) => {
+              console.log(`res2: ${JSON.stringify(res2)}`);
+              setSchool(res2.school);
+              setMajor(res2.major);
+              setDescription(res2.description);
+              setDegree(res2.degree);
+              setYear(res2.year);
+              setOneLiner(res2.oneLiner);
+            });
+          });
       });
+    }
   }, []);
 
   return (

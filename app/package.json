@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^12.1.10",
     "autoprefixer": "^9",
     "moralis": "0.0.42",
+    "netlify-cli": "^6.13.1",
     "postcss": "^7",
     "react": "^17.0.2",
     "react-anchor-link-smooth-scroll": "^1.0.12",
@@ -22,7 +23,8 @@
     "redux": "^4.1.1",
     "redux-thunk": "^2.3.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "ethers": "^5.4.7"
   },
   "scripts": {
     "start": "craco start",

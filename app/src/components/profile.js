@@ -45,7 +45,7 @@ const Profile = (props) => {
       </div>
       <div className="mb-4">
         <span className="border-2 border-gray-600 rounded-full py-0.5 px-0.5 text-xs text-gray-600 ">
-          {props.profilePublicView?.get("verfiied")
+          {props.profilePublicView?.get("verified")
             ? "Verified"
             : "Not verified"}
         </span>
@@ -55,7 +55,7 @@ const Profile = (props) => {
       <div className="items-center mb-8">
         <img
           className="mr-4 h-96 w-144 items-center border-green-100 border-4 rounded-xl object-cover"
-          src={dp1}
+          src={props.profilePublicView?.get("cropped_pic")}
         ></img>
       </div>
       <div className="flex flex-row mb-2">

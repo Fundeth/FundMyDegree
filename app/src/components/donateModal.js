@@ -1,7 +1,13 @@
 import { React, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { donate } from "../adapters/contracts";
 
 const DonateModal = (props) => {
   const [donationAmount, setDonationAmount] = useState(0);
+  const campaignContract = useSelector(
+    (state) => state.contract.campaignContract
+  );
+
   return (
     <>
       {props.showDonateModal ? (
@@ -62,7 +68,21 @@ const DonateModal = (props) => {
                   <button
                     className="w-32 bg-green-600 text-white rounded-full py-3 px-6 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
                     type="button"
-                    onClick={() => props.setShowDonateModal(false)}
+                    onClick={() => {
+                      console.log(donationAmount);
+
+                      donate(
+                        campaignContract,
+                        props.student,
+                        donationAmount
+                      ).then((res) => {
+                        const totalDonation =
+                          parseInt(props.received) + parseInt(donationAmount);
+                        console.log(totalDonation);
+                        props.setReceived(totalDonation);
+                        props.setShowDonateModal(false);
+                      });
+                    }}
                   >
                     Confirm
                   </button>

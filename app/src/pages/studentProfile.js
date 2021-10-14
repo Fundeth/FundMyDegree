@@ -9,6 +9,7 @@ import { fromWei } from "../utils/utils";
 import { fetchCampaign, getUserProfile } from "../adapters/MoralisAdapter";
 import DisburseModal from "../components/disburseModal";
 import DonateModal from "../components/donateModal";
+import { balanceOf } from "../adapters/contracts";
 
 const StudentProfile = () => {
   const history = useHistory();
@@ -21,6 +22,11 @@ const StudentProfile = () => {
   const loading = useSelector((state) => state.loading.loading);
   const campaignContract = useSelector(
     (state) => state.contract.campaignContract
+  );
+  const tokenContract = useSelector((state) => state.contract.tokenContract);
+  console.log(tokenContract);
+  console.log(
+    balanceOf(tokenContract, "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707")
   );
   const profile = useSelector((state) => state.profile.publicView);
 
@@ -45,6 +51,8 @@ const StudentProfile = () => {
       .getCampaign(location.pathname.split("/")[2])
       .then((res) => {
         console.log(`res from contract ${JSON.stringify(res)}`);
+        console.log(`received ${parseInt(res.received)}`);
+
         setTarget(parseInt(fromWei(res.target)));
         setReceived(parseInt(fromWei(res.received)));
 
@@ -77,8 +85,7 @@ const StudentProfile = () => {
           />
         </div>
         <div className="w-2/5  ">
-          {profilePublicView?.get("ethAddress") ===
-            location.pathname.split("/")[2] && (
+          {profile?.get("ethAddress") === location.pathname.split("/")[2] && (
             <div className="flex flex-row items-center justify-center">
               <button
                 className="w-24 bg-white text-green-600 text-xs rounded-full py-1 px-1 border-1 border-green-600"
@@ -101,7 +108,7 @@ const StudentProfile = () => {
               <div className="relative w-3/4 justify-center ml-12 mr-12">
                 <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-green-100">
                   <div
-                    style={{ width: `${received / target}` }}
+                    style={{ width: `${(received * 100) / target}%` }}
                     className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"
                   ></div>
                 </div>
@@ -137,10 +144,14 @@ const StudentProfile = () => {
       <DisburseModal
         showDisburseModal={showDisburseModal}
         setShowDisburseModal={setShowDisburseModal}
+        student={location.pathname.split("/")[2]}
       />
       <DonateModal
         showDonateModal={showDonateModal}
         setShowDonateModal={setShowDonateModal}
+        student={location.pathname.split("/")[2]}
+        received={received}
+        setReceived={setReceived}
       />
     </div>
   );

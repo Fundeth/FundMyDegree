@@ -7,7 +7,9 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@walletconnect/web3-provider": "^1.6.6",
     "autoprefixer": "^9",
+    "ethers": "^5.4.7",
     "moralis": "0.0.42",
     "netlify-cli": "^6.13.1",
     "postcss": "^7",
@@ -23,8 +25,7 @@
     "redux": "^4.1.1",
     "redux-thunk": "^2.3.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
-    "web-vitals": "^1.0.1",
-    "ethers": "^5.4.7"
+    "web-vitals": "^1.0.1"
   },
   "scripts": {
     "start": "craco start",

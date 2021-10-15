@@ -113,6 +113,11 @@ const VerificationModal = (props) => {
                         props.students[props.studentIdx].amount
                       ).then((res) => {
                         let updatedStudent = props.students[props.studentIdx];
+                        props.setBalance(
+                          props.balance +
+                            props.students[props.studentIdx].amount
+                        );
+
                         updatedStudent.receivedAmount =
                           updatedStudent.receivedAmount +
                           props.students[props.studentIdx].amount;

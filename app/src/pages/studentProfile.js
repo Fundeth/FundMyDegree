@@ -43,50 +43,26 @@ const StudentProfile = () => {
   }, []);
 
   useEffect(() => {
-    if (Object.keys(campaignContract).length !== 0) {
-      campaignContract
-        .getCampaign(location.pathname.split("/")[2])
-        .then((res) => {
-          console.log(`res from contract ${JSON.stringify(res)}`);
-          console.log(`received ${parseInt(res.received)}`);
+    console.log(campaignContract);
+    campaignContract
+      .getCampaign(location.pathname.split("/")[2])
+      .then((res) => {
+        console.log(`res from contract ${JSON.stringify(res)}`);
+        console.log(`received ${parseInt(res.received)}`);
 
-          setTarget(parseInt(fromWei(res.target)));
-          setReceived(parseInt(fromWei(res.received)));
+        setTarget(parseInt(fromWei(res.target)));
+        setReceived(parseInt(fromWei(res.received)));
 
-          fetchCampaign(res.info).then((res2) => {
-            console.log(`res2: ${JSON.stringify(res2)}`);
-            setSchool(res2.school);
-            setMajor(res2.major);
-            setDescription(res2.description);
-            setDegree(res2.degree);
-            setYear(res2.year);
-            setOneLiner(res2.oneLiner);
-          });
+        fetchCampaign(res.info).then((res2) => {
+          console.log(`res2: ${JSON.stringify(res2)}`);
+          setSchool(res2.school);
+          setMajor(res2.major);
+          setDescription(res2.description);
+          setDegree(res2.degree);
+          setYear(res2.year);
+          setOneLiner(res2.oneLiner);
         });
-    } else {
-      initContracts().then((res) => {
-        console.log(res);
-        res.campaignContract
-          .getCampaign(location.pathname.split("/")[2])
-          .then((res) => {
-            console.log(`res from contract ${JSON.stringify(res)}`);
-            console.log(`received ${parseInt(res.received)}`);
-
-            setTarget(parseInt(fromWei(res.target)));
-            setReceived(parseInt(fromWei(res.received)));
-
-            fetchCampaign(res.info).then((res2) => {
-              console.log(`res2: ${JSON.stringify(res2)}`);
-              setSchool(res2.school);
-              setMajor(res2.major);
-              setDescription(res2.description);
-              setDegree(res2.degree);
-              setYear(res2.year);
-              setOneLiner(res2.oneLiner);
-            });
-          });
       });
-    }
   }, []);
 
   return (
@@ -135,7 +111,9 @@ const StudentProfile = () => {
                 </div>
               </div>
               <div className="text-sm mb-2 h-1/6">
-                <span className="">{`10 people donated to this campaign`}</span>
+                <span className="">
+                  {/*`10 people donated to this campaign`*/}
+                </span>
               </div>
               <div className=""></div>
             </div>

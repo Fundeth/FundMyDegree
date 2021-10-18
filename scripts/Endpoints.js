@@ -315,3 +315,17 @@ Moralis.Cloud.define("getActiveStudents", async (request) => {
     return false;
   }
 });
+
+Moralis.Cloud.define("getMajors", async (request) => {
+  const majorsQuery = new Moralis.Query("Majors");
+  const majors = await majorsQuery.find();
+
+  return majors;
+});
+
+Moralis.Cloud.define("getDegrees", async (request) => {
+  const degreesQuery = new Moralis.Query("Degree");
+  const degrees = await degreesQuery.find();
+
+  return degrees;
+});

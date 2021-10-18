@@ -133,6 +133,26 @@ export async function getAllSchools() {
   }
 }
 
+export async function getAllMajors() {
+  try {
+    const res = await Moralis.Cloud.run("getMajors");
+    console.log(res);
+    return res;
+  } catch (err) {
+    console.log(`err while getting user ${err}`);
+  }
+}
+
+export async function getAllDegrees() {
+  try {
+    const res = await Moralis.Cloud.run("getDegrees");
+    console.log(res);
+    return res;
+  } catch (err) {
+    console.log(`err while getting user ${err}`);
+  }
+}
+
 export async function uploadCampaign(campaign) {
   const file = new Moralis.File(campaign.id, {
     base64: btoa(JSON.stringify(campaign)),

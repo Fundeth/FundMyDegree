@@ -10,6 +10,8 @@ import {
   saveCampaign,
   getAllSchools,
   getUser,
+  getAllMajors,
+  getAllDegrees,
 } from "../adapters/MoralisAdapter";
 import { useHistory } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
@@ -20,6 +22,8 @@ const CreateCampaign = () => {
   const history = useHistory();
   const [page, setPage] = useState(0);
   const [schoolOptions, setSchoolOptions] = useState([]);
+  const [majorOptions, setMajorOptions] = useState([]);
+  const [degreeOptions, setDegreeOptions] = useState([]);
   const campaignContract = useSelector(
     (state) => state.contract.campaignContract
   );
@@ -40,6 +44,7 @@ const CreateCampaign = () => {
     actionCreators,
     dispatch
   );
+
   function goNextPage() {
     setPage((page) => page + 1);
   }
@@ -48,9 +53,11 @@ const CreateCampaign = () => {
   }
 
   useEffect(() => {
-    console.log("eieieieie");
     setLoading(true);
     let validSchools = [];
+    let validMajors = [];
+    let validDegrees = [];
+
     if (!profile) {
       getUser().then((user) => {
         console.log(user);
@@ -67,6 +74,26 @@ const CreateCampaign = () => {
       });
       setSchoolOptions(validSchools);
       setLoading(false);
+    });
+
+    getAllMajors().then((majors) => {
+      console.log(`majors ${JSON.stringify(majors)}`);
+      majors.map((major) => {
+        validMajors.push({
+          label: major.get("major_name"),
+        });
+      });
+      setMajorOptions(validMajors);
+    });
+
+    getAllDegrees().then((degrees) => {
+      console.log(`majors ${JSON.stringify(degrees)}`);
+      degrees.map((degree) => {
+        validDegrees.push({
+          label: degree.get("degree_name"),
+        });
+      });
+      setDegreeOptions(validDegrees);
     });
   }, []);
   if (loading) {
@@ -89,6 +116,8 @@ const CreateCampaign = () => {
           {page === 1 && (
             <SchoolInfo
               schoolOptions={schoolOptions}
+              majorOptions={majorOptions}
+              degreeOptions={degreeOptions}
               school={school}
               setSchool={setSchool}
               major={major}

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import ProfileCard from "../components/profileCard";
-import {
-  customStyles,
-  schoolOptions,
-  majorOptions,
-} from "../components/constants";
+import { customStyles, schoolOptions } from "../components/constants";
 import Select from "react-select";
-import { getActiveCampaigns } from "../adapters/MoralisAdapter";
+import {
+  getActiveCampaigns,
+  getAllMajors,
+  getAllSchools,
+} from "../adapters/MoralisAdapter";
 import { getAllCampaigns } from "../adapters/contracts";
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -16,6 +16,8 @@ import teaching from "../images/Teaching-amico.png";
 
 const ExploreCampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
+  const [majorOptions, setMajorOptions] = useState([]);
+  const [schoolOptions, setSchoolOptions] = useState([]);
 
   const loading = useSelector((state) => state.loading.loading);
   const dispatch = useDispatch();
@@ -23,6 +25,29 @@ const ExploreCampaigns = () => {
     getActiveCampaigns(null, null).then((res) => {
       console.log(res);
       res ? setCampaigns(res) : setCampaigns([]);
+    });
+
+    let validSchools = [];
+    getAllSchools().then((schools) => {
+      console.log(schools);
+      schools.map((school) => {
+        validSchools.push({
+          value: school.get("ethAddress"),
+          label: school.get("first_name"),
+        });
+      });
+      setSchoolOptions(validSchools);
+    });
+
+    let validMajors = [];
+    getAllMajors().then((majors) => {
+      console.log(`majors ${JSON.stringify(majors)}`);
+      majors.map((major) => {
+        validMajors.push({
+          label: major.get("major_name"),
+        });
+      });
+      setMajorOptions(validMajors);
     });
   }, []);
 

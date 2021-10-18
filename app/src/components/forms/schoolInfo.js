@@ -28,23 +28,29 @@ const SchoolInfo = (props) => {
         <div className="flex flex-col w-1/4 mr-8">
           <div className="ml-2 flex flex-row text-sm">Degree</div>
 
-          <input
-            value={props.degree}
+          <Select
             autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
-            onChange={(evt) => props.setDegree(evt.target.value)}
-          ></input>
+            value={props.degree}
+            options={props.degreeOptions}
+            classNamePrefix="select"
+            styles={customStyles}
+            className="mt-1 flex-1 border-1 rounded-xl border-black w-full"
+            onChange={(degreeOptions) => props.setDegree(degreeOptions)}
+          />
         </div>
 
         <div className="flex flex-col w-1/4 mr-8">
           <div className="ml-2 flex flex-row text-sm">Major</div>
 
-          <input
-            value={props.major}
+          <Select
             autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
-            onChange={(evt) => props.setMajor(evt.target.value)}
-          ></input>
+            value={props.major}
+            options={props.majorOptions}
+            classNamePrefix="select"
+            styles={customStyles}
+            className="mt-1 flex-1 border-1 rounded-xl border-black w-full"
+            onChange={(majorOptions) => props.setMajor(majorOptions)}
+          />
         </div>
       </div>
 
@@ -53,6 +59,10 @@ const SchoolInfo = (props) => {
           <div className="ml-2 flex flex-row text-sm">Enrollment Year</div>
 
           <input
+            type="number"
+            min="2018"
+            max="2030"
+            step="1"
             value={props.year}
             autoFocus
             className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"

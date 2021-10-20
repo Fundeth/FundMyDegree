@@ -24,7 +24,7 @@ const ProfileCard = (props) => {
               </div>
             </div>
           </div>
-          <div class="bg-cover bg-center h-24 m-4 mt-2 mb-0 justify-center text-md">
+          <div class="bg-cover bg-center h-12 m-4 mt-2 mb-0 justify-center text-md">
             {props.campaign.get("oneLiner")}
           </div>
 

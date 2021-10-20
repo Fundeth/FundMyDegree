@@ -53,8 +53,8 @@ const VerificationModal = (props) => {
                   <div className="flex flex-col mb-2">
                     <div className="text-sm ">Degree and major:</div>
                     <div className="text-lg">
-                      {props.students[props.studentIdx].degree} in{" "}
-                      {props.students[props.studentIdx].major}
+                      {props.students[props.studentIdx].degree.label} in{" "}
+                      {props.students[props.studentIdx].major.label}
                     </div>
                   </div>
                   <div className="flex mb-2 flex-row">

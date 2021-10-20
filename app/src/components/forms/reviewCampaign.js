@@ -38,7 +38,7 @@ const ReviewCampaign = (props) => {
           <div className="ml-2 flex flex-row text-sm">Major</div>
 
           <input
-            value={props.major}
+            value={props.major.label}
             autoFocus
             className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
           ></input>

@@ -13,13 +13,21 @@ import { bindActionCreators } from "redux";
 import { actionCreators } from "../store";
 import { setCampaign } from "../store/actionCreators";
 import teaching from "../images/teaching.png";
+import { useMoralis } from "react-moralis";
 
 const ExploreCampaigns = () => {
+  const {
+    isAuthenticating,
+    authenticate,
+    isAuthenticated,
+    logout,
+    Moralis,
+    user,
+  } = useMoralis();
+
   const [campaigns, setCampaigns] = useState([]);
   const [majorOptions, setMajorOptions] = useState([]);
   const [schoolOptions, setSchoolOptions] = useState([]);
-
-  const loading = useSelector((state) => state.loading.loading);
   const dispatch = useDispatch();
   useEffect(() => {
     getActiveCampaigns(null, null).then((res) => {
@@ -51,9 +59,6 @@ const ExploreCampaigns = () => {
     });
   }, []);
 
-  if (loading) {
-    return <div>Loading pls</div>;
-  }
   return (
     <div className=" ">
       <div className="flex bg-beige w-full h-72">
@@ -69,7 +74,12 @@ const ExploreCampaigns = () => {
             Fund the future of our world
           </div>
           <div className="flex flex-row">
-            <button className="rounded-full h-12 w-40 bg-green-600 text-center text-white transform transition duration-500 ease-linear hover:scale-105 hover:cursor-pointer">
+            <button
+              className="rounded-full h-12 w-40 bg-green-600 text-center text-white transform transition duration-500 ease-linear hover:scale-105 hover:cursor-pointer"
+              onClick={() => {
+                authenticate().then(() => {});
+              }}
+            >
               Fund a Student
             </button>
           </div>

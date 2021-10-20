@@ -129,7 +129,7 @@ const CollegeDashboard = () => {
         </div>
         <div className="flex flex-row ">
           <button
-            className="w-24 bg-white text-green-600 text-xs rounded-full py-1 px-1 border-1 border-green-600"
+            className="w-24 text-black text-xs rounded-full py-1 px-1 border-1 border-black"
             onClick={() => {
               history.push("/editSchoolProfile");
             }}

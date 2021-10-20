@@ -85,7 +85,7 @@ const StudentProfile = () => {
           {profile?.get("ethAddress") === location.pathname.split("/")[2] && (
             <div className="flex flex-row items-center justify-center">
               <button
-                className="w-24 bg-white text-green-600 text-xs rounded-full py-1 px-1 border-1 border-green-600"
+                className="w-24 text-black-600 text-xs rounded-full py-1 px-1 border-1 border-black"
                 onClick={() => {
                   history.push("/editProfile");
                 }}
@@ -94,7 +94,7 @@ const StudentProfile = () => {
               </button>
             </div>
           )}
-          <div className="h-1/4 mt-32 mr-16 ml-16 border-1 shadow-xl sticky">
+          <div className="h-48 mt-32 mr-16 ml-16 border-1 shadow-xl sticky bg-white">
             <div className="flex flex-col text-center h-1/6"></div>
 
             <div className="flex flex-col text-center h-2/6">

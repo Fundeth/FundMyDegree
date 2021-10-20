@@ -22,6 +22,8 @@ const Navbar = () => {
 
   const history = useHistory();
   const location = useLocation();
+  console.log(location.pathname);
+
   const dispatch = useDispatch();
   const { setProfile, setLoading } = bindActionCreators(
     actionCreators,
@@ -29,6 +31,10 @@ const Navbar = () => {
   );
   const profile = useSelector((state) => state.profile.publicView);
   const tokenContract = useSelector((state) => state.contract.tokenContract);
+  const [activeViewProfile, setActiveViewProfile] = useState(false);
+  const [activeFundStudent, setActiveFundStudent] = useState(false);
+  console.log(profile);
+
   return (
     <nav
       className="flex justify-between items-center h-16 text-black mx-auto px-4 bg-greyfmd sticky top-0 z-10 bg-clip-padding shadow-lg"
@@ -57,32 +63,30 @@ const Navbar = () => {
       </div>
       <div class="flex-row md:hidden sm:hidden w-full block flex-grow lg:flex lg:w-auto items-center justify-end pr-8">
         <div class="text-sm lg:flex-grow">
-          {!isAuthenticated && (
+          {profile === null && (
             <div>
               <button
                 class="block mt-4 lg:inline-block lg:mt-0 text-black mr-4 transform transition duration-500 ease-linear hover:scale-105"
                 onClick={() => {
-                  if (!isAuthenticated) {
-                    authenticate().then(() => {
-                      setLoading(true);
-                      getUser().then((user) => {
-                        console.log(user);
-                        setProfile(user);
-                        setLoading(false);
-                        if (user && user.get("role") === "student") {
-                          history.push(
-                            `/studentProfile/${user.get("ethAddress")}`
-                          );
-                        } else if (user && user.get("role") === "school") {
-                          history.push("/collegeDashboard");
-                        } else {
-                          history.push("/createProfile");
-                        }
-                      });
+                  authenticate().then(() => {
+                    setLoading(true);
+                    getUser().then((user) => {
+                      console.log(user);
+                      setProfile(user);
+                      setLoading(false);
+                      setActiveViewProfile(true);
+                      setActiveFundStudent(false);
+                      if (user && user.get("role") === "student") {
+                        history.push(
+                          `/studentProfile/${user.get("ethAddress")}`
+                        );
+                      } else if (user && user.get("role") === "school") {
+                        history.push("/collegeDashboard");
+                      } else {
+                        history.push("/createProfile");
+                      }
                     });
-                  } else {
-                    history.push("/createProfile");
-                  }
+                  });
                 }}
               >
                 I am a student
@@ -93,11 +97,13 @@ const Navbar = () => {
                   if (!isAuthenticated) {
                     authenticate().then(() => {
                       setLoading(true);
+                      setActiveViewProfile(true);
 
                       getUser().then((user) => {
                         setProfile(user);
                         setLoading(false);
-
+                        setActiveViewProfile(true);
+                        setActiveFundStudent(false);
                         console.log(`user connected ${user}`);
                         if (user && user.get("role") === "school") {
                           history.push("/collegeDashboard");
@@ -110,8 +116,6 @@ const Navbar = () => {
                         }
                       });
                     });
-                  } else {
-                    history.push("/createSchoolProfile");
                   }
                 }}
               >
@@ -119,28 +123,58 @@ const Navbar = () => {
               </button>
             </div>
           )}
-          {location.pathname === "/editProfile" && (
+          {profile !== null && (
             <div>
-              <button
-                class="block mt-4 lg:inline-block lg:mt-0 text-black mr-4 transform transition duration-500 ease-linear hover:scale-105"
-                onClick={() => {
-                  history.push(`/studentProfile/${profile?.get("ethAddress")}`);
-                }}
-              >
-                View Profile
-              </button>
-            </div>
-          )}
-          {location.pathname.includes("/studentProfile/") && (
-            <div>
-              <button
-                class="block mt-4 lg:inline-block lg:mt-0 text-black mr-4 transform transition duration-500 ease-linear hover:scale-105"
-                onClick={() => {
-                  history.push(`/`);
-                }}
-              >
-                Explore campaigns
-              </button>
+              {activeViewProfile && profile && (
+                <button
+                  class="block mt-4 lg:inline-block lg:mt-0 text-bluefmd mr-4 transform transition duration-500 ease-linear hover:scale-105 border-b-2 border-bluefmd"
+                  onClick={() => {
+                    setActiveViewProfile(true);
+                    setActiveFundStudent(false);
+                  }}
+                >
+                  My Profile
+                </button>
+              )}
+              {!activeViewProfile && profile && (
+                <button
+                  class="block mt-4 lg:inline-block lg:mt-0 text-black mr-4 transform transition duration-500 ease-linear hover:scale-105"
+                  onClick={() => {
+                    setActiveViewProfile(true);
+                    setActiveFundStudent(false);
+                    if (profile && profile.get("role") === "student") {
+                      history.push(`/studentProfile/${user.get("ethAddress")}`);
+                    } else if (profile && profile.get("role") === "school") {
+                      history.push("/collegeDashboard");
+                    }
+                  }}
+                >
+                  My Profile
+                </button>
+              )}
+              {activeFundStudent && (
+                <button
+                  class="block mt-4 lg:inline-block lg:mt-0 text-bluefmd mr-4 transform transition duration-500 ease-linear hover:scale-105 border-b-2 border-bluefmd"
+                  onClick={() => {
+                    setActiveViewProfile(false);
+                    setActiveFundStudent(true);
+                  }}
+                >
+                  Fund a student
+                </button>
+              )}
+              {!activeFundStudent && (
+                <button
+                  class="block mt-4 lg:inline-block lg:mt-0 text-black mr-4 transform transition duration-500 ease-linear hover:scale-105"
+                  onClick={() => {
+                    setActiveViewProfile(false);
+                    setActiveFundStudent(true);
+                    history.push("/");
+                  }}
+                >
+                  Fund a student
+                </button>
+              )}
             </div>
           )}
         </div>
@@ -169,7 +203,6 @@ const Navbar = () => {
             onClick={() => {
               if (!isAuthenticated) {
                 authenticate().then(() => {
-                  console.log(`hi`);
                   console.log(tokenContract);
                   mintFMDToken(tokenContract);
                 });
@@ -190,7 +223,8 @@ const Navbar = () => {
                 if (!isAuthenticated) {
                   authenticate().then(() => {
                     setLoading(true);
-
+                    setActiveViewProfile(false);
+                    setActiveFundStudent(true);
                     getUser().then((user) => {
                       setProfile(user);
                       setLoading(false);
@@ -214,6 +248,9 @@ const Navbar = () => {
             onClick={() => {
               if (isAuthenticated) {
                 logout();
+                setProfile(null);
+                setActiveViewProfile(false);
+                setActiveFundStudent(false);
                 history.push("/");
               }
             }}

@@ -35,7 +35,7 @@ const SchoolInfo = (props) => {
             classNamePrefix="select"
             styles={customStyles}
             className="mt-1 flex-1 border-1 rounded-xl border-black w-full bg-white"
-            onChange={(degreeOptions) => props.setDegree(degreeOptions)}
+            onChange={(degreeOption) => props.setDegree(degreeOption)}
           />
         </div>
 
@@ -49,7 +49,7 @@ const SchoolInfo = (props) => {
             classNamePrefix="select"
             styles={customStyles}
             className="mt-1 flex-1 border-1 rounded-xl border-black w-full bg-white"
-            onChange={(majorOptions) => props.setMajor(majorOptions)}
+            onChange={(majorOption) => props.setMajor(majorOption)}
           />
         </div>
       </div>

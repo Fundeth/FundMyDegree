@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../store";
 import { setCampaign } from "../store/actionCreators";
-import teaching from "../images/Teaching-amico.png";
+import teaching from "../images/teaching.png";
 
 const ExploreCampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
@@ -55,8 +55,8 @@ const ExploreCampaigns = () => {
     return <div>Loading pls</div>;
   }
   return (
-    <div>
-      <div className="flex bg-white w-full h-72">
+    <div className=" ">
+      <div className="flex bg-beige w-full h-72">
         <div className="flex flex-col w-1/2 items-end justify-center text-md tracking-wider">
           <div className="flex flex-row text-3xl font-bold mb text-right">
             College has never been
@@ -69,11 +69,8 @@ const ExploreCampaigns = () => {
             Fund the future of our world
           </div>
           <div className="flex flex-row">
-            <button className="rounded-full mr-4 h-12 w-40 bg-green-600 text-center text-white transform transition duration-500 ease-linear hover:scale-105 hover:cursor-pointer">
-              Donate now
-            </button>
             <button className="rounded-full h-12 w-40 bg-green-600 text-center text-white transform transition duration-500 ease-linear hover:scale-105 hover:cursor-pointer">
-              Create a campaign
+              Fund a Student
             </button>
           </div>
         </div>

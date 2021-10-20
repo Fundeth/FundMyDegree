@@ -22,13 +22,13 @@ const Target = (props) => {
             min="0"
             step="1000"
             autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
+            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
             onChange={(evt) => props.setTarget(evt.target.value)}
           ></input>
         </div>
       </div>
       <div
-        class="w-1/2 mt-8 flex items-center bg-red-100 text-red-800 text-sm px-4 py-3 rounded-xl"
+        class="w-1/2 mt-8 flex items-center bg-blue-100 text-bluefmd text-sm px-4 py-3 rounded-xl"
         role="alert"
       >
         <svg

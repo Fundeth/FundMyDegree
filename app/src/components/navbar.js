@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AnchorLink from "react-anchor-link-smooth-scroll";
-import logo from "../images/logo.png";
+import logo from "../images/logooo.png";
 import { useMoralis } from "react-moralis";
 import { formatAddress } from "../utils/utils";
 import { Link, useHistory, useLocation } from "react-router-dom";
@@ -31,7 +31,7 @@ const Navbar = () => {
   const tokenContract = useSelector((state) => state.contract.tokenContract);
   return (
     <nav
-      className="flex justify-between items-center h-16 text-black mx-auto px-4 bg-white sticky top-0 z-10 bg-clip-padding shadow-lg"
+      className="flex justify-between items-center h-16 text-black mx-auto px-4 bg-greyfmd sticky top-0 z-10 bg-clip-padding shadow-lg"
       role="navigation"
     >
       <Link to="/">

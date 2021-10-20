@@ -22,7 +22,7 @@ const Portfolio = (props) => {
           <input
             value={props.website}
             autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
+            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
             onChange={(evt) => {
               props.setWebsite(evt.target.value);
             }}
@@ -31,7 +31,7 @@ const Portfolio = (props) => {
           <input
             value={props.linkedIn}
             autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
+            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
             onChange={(evt) => {
               props.setLinkedIn(evt.target.value);
             }}
@@ -42,7 +42,7 @@ const Portfolio = (props) => {
           <input
             value={props.portfolio}
             autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
+            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
             onChange={(evt) => {
               props.setPortfolio(evt.target.value);
             }}

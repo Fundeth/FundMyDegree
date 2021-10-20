@@ -18,7 +18,7 @@ const Education = (props) => {
           <input
             value={props.educationLevel}
             autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
+            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
             onChange={(evt) => {
               props.setEducationLevel(evt.target.value);
             }}

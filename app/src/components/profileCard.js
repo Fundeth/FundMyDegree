@@ -46,7 +46,7 @@ const ProfileCard = (props) => {
                   );
                 }}
               >
-                Donate
+                View Profile
               </button>
             </div>
           </div>

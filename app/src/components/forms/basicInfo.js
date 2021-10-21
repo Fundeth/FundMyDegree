@@ -44,7 +44,7 @@ const BasicInfo = (props) => {
           <input
             value={props.firstName}
             autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
+            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
             onChange={(evt) => {
               props.setFirstName(evt.target.value);
             }}
@@ -55,7 +55,7 @@ const BasicInfo = (props) => {
           <input
             value={props.lastName}
             autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
+            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
             onChange={(evt) => {
               props.setLastName(evt.target.value);
             }}
@@ -70,7 +70,7 @@ const BasicInfo = (props) => {
           <input
             value={props.email}
             autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
+            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
             onChange={(evt) => {
               props.setEmail(evt.target.value);
             }}

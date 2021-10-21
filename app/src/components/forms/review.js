@@ -13,7 +13,7 @@ const Review = (props) => {
           <input
             value={props.firstName}
             autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
+            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
           ></input>
         </div>
 
@@ -23,7 +23,7 @@ const Review = (props) => {
           <input
             value={props.lastName}
             autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
+            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
           ></input>
         </div>
       </div>
@@ -34,7 +34,7 @@ const Review = (props) => {
           <input
             value={props.address1}
             autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
+            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
           ></input>
         </div>
       </div>
@@ -45,7 +45,7 @@ const Review = (props) => {
           <input
             value={props.address2}
             autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
+            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
           ></input>
         </div>
       </div>
@@ -56,7 +56,7 @@ const Review = (props) => {
           <input
             value={props.city}
             autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
+            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
           ></input>
         </div>
         <div className="flex flex-col w-1/4 ml-8">
@@ -65,7 +65,7 @@ const Review = (props) => {
           <input
             value={props.state}
             autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
+            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
           ></input>
         </div>
       </div>
@@ -76,7 +76,7 @@ const Review = (props) => {
           <input
             value={props.postalCode}
             autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
+            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
           ></input>
         </div>
         <div className="flex flex-col w-1/4 ml-8">
@@ -85,7 +85,7 @@ const Review = (props) => {
           <input
             value={props.country}
             autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
+            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
           ></input>
         </div>
       </div>
@@ -98,7 +98,7 @@ const Review = (props) => {
           <input
             value={props.educationLevel}
             autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
+            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
           ></input>
         </div>
         <div className="flex flex-col w-1/4 ml-8">
@@ -107,7 +107,7 @@ const Review = (props) => {
           <input
             value={props.email}
             autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
+            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
           ></input>
         </div>
       </div>

@@ -160,7 +160,7 @@ const CreateProfile = () => {
             <div className="flex flex-col w-1/3 items-center">
               {page !== 4 && page !== 0 && (
                 <button
-                  class="w-32 bg-green-600 text-white rounded-full py-3 px-6 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
+                  class="w-32 bg-green-600  text-white rounded-full py-3 px-6 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
                   type="button"
                   onClick={goNextPage}
                 >
@@ -170,7 +170,7 @@ const CreateProfile = () => {
 
               {page !== 4 && page === 0 && (
                 <button
-                  class="w-32 bg-green-600 text-white rounded-full py-3 px-6 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
+                  class="w-32 bg-green-600  text-white rounded-full py-3 px-6 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
                   type="button"
                   onClick={goNextPage}
                 >
@@ -180,7 +180,7 @@ const CreateProfile = () => {
 
               {page === 4 && (
                 <button
-                  class="w-48 bg-green-600 text-white rounded-full py-3 px-6 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
+                  class="w-48 bg-green-600  text-white rounded-full py-3 px-6 ml-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 outline-none"
                   type="button"
                   onClick={() => {
                     insertUserBasic(

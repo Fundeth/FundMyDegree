@@ -7,12 +7,16 @@ module.exports = {
         1: "1px",
       },
       colors: {
-        beige: '#F0EAD6',
+        beige: "#ffd699",
+        bluefmd: "#0076BE",
+        greenfmd: "#45BD8E",
+        greyfmd: "#F5F5F5",
+        greyfmd2: "#cfebfd",
       },
       spacing: {
-        '128': '32rem',
-        '144': '36rem',
-      }
+        128: "32rem",
+        144: "36rem",
+      },
     },
   },
   variants: {

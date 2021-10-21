@@ -15,7 +15,7 @@ const Paragraph = (props) => {
             value={props.oneLiner}
             autoFocus
             rows="2"
-            className="flex flex-row bg-transparent outline-none border-1 rounded-lg border-black justify-center"
+            className="flex flex-row bg-transparent outline-none border-1 rounded-lg border-black justify-center bg-white"
             onChange={(evt) => props.setOneLiner(evt.target.value)}
           ></textarea>
         </div>
@@ -29,7 +29,7 @@ const Paragraph = (props) => {
             value={props.description}
             autoFocus
             rows="10"
-            className="flex flex-row bg-transparent outline-none border-1 rounded-lg border-black justify-center"
+            className="flex flex-row bg-transparent outline-none border-1 rounded-lg border-black justify-center bg-white"
             onChange={(evt) => props.setDescription(evt.target.value)}
           ></textarea>
         </div>

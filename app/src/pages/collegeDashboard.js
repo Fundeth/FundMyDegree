@@ -22,7 +22,10 @@ const CollegeDashboard = () => {
   const [studentIdx, setStudentIdx] = useState(0);
   const [balance, setBalance] = useState(0);
   const [checkBalance, setCheckBalance] = useState(true);
-
+  const tokenContract = useSelector((state) => state.contract.tokenContract);
+  const campaignContract = useSelector(
+    (state) => state.contract.campaignContract
+  );
   const { Moralis, user } = useMoralis();
 
   const dispatch = useDispatch();
@@ -31,10 +34,7 @@ const CollegeDashboard = () => {
   const profile = useSelector((state) => state.profile.publicView);
   const { setProfile, setLoading, setCampaignContract, setTokenContract } =
     bindActionCreators(actionCreators, dispatch);
-  const campaignContract = useSelector(
-    (state) => state.contract.campaignContract
-  );
-  const tokenContract = useSelector((state) => state.contract.tokenContract);
+
   useEffect(() => {
     if (!profile) {
       setLoading(true);
@@ -129,7 +129,7 @@ const CollegeDashboard = () => {
         </div>
         <div className="flex flex-row ">
           <button
-            className="w-24 bg-white text-green-600 text-xs rounded-full py-1 px-1 border-1 border-green-600"
+            className="w-24 text-black text-xs rounded-full py-1 px-1 border-1 border-black"
             onClick={() => {
               history.push("/editSchoolProfile");
             }}
@@ -144,7 +144,7 @@ const CollegeDashboard = () => {
             <div className="flex flex-row font-bold text-black text-lg mb-4">
               Pending Approvals - {`${numDisbursed}`}
             </div>
-            <div className="flex flex-row h-56">
+            <div className="flex flex-row h-56 bg-white rounded-lg">
               <div className="border-1 shadow-lg min-h-full  w-full">
                 <div className="flex flex-row mt-4 border-b-2">
                   <div class="w-1/2">
@@ -197,10 +197,10 @@ const CollegeDashboard = () => {
                 )}
               </div>
             </div>
-            <div className="flex flex-row font-bold text-black text-lg mb-4 mt-8">
+            <div className="flex flex-row font-bold text-black text-lg mb-4 mt-8 ">
               Received funds
             </div>
-            <div className="flex flex-row h-56 w-full ">
+            <div className="flex flex-row h-56 w-full bg-white rounded-lg">
               <div className="border-1 shadow-lg  min-h-full  w-full">
                 <div className="flex flex-row mt-4 border-b-2">
                   <div class="w-full">
@@ -251,8 +251,8 @@ const CollegeDashboard = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col w-2/5 items-center justify-start mt-12">
-          <div className="border-1 shadow-xl h-72 w-3/5 text-center">
+        <div className="flex flex-col w-2/5 items-center justify-start mt-12 ">
+          <div className="border-1 shadow-xl h-72 w-3/5 text-center bg-white rounded-lg">
             <div className="text-sm  mt-4">{`Balance`}</div>
             <div className="font-semibold text-2xl  mt-2">${balance}</div>
 

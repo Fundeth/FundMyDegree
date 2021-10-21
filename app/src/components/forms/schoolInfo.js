@@ -18,7 +18,7 @@ const SchoolInfo = (props) => {
             options={props.schoolOptions}
             classNamePrefix="select"
             styles={customStyles}
-            className="mt-1 flex-1 border-1 rounded-xl border-black w-full"
+            className="mt-1 flex-1 border-1 rounded-xl border-black w-full bg-white"
             onChange={(schoolOption) => props.setSchool(schoolOption)}
           />
         </div>
@@ -34,8 +34,8 @@ const SchoolInfo = (props) => {
             options={props.degreeOptions}
             classNamePrefix="select"
             styles={customStyles}
-            className="mt-1 flex-1 border-1 rounded-xl border-black w-full"
-            onChange={(degreeOptions) => props.setDegree(degreeOptions)}
+            className="mt-1 flex-1 border-1 rounded-xl border-black w-full bg-white"
+            onChange={(degreeOption) => props.setDegree(degreeOption)}
           />
         </div>
 
@@ -48,8 +48,8 @@ const SchoolInfo = (props) => {
             options={props.majorOptions}
             classNamePrefix="select"
             styles={customStyles}
-            className="mt-1 flex-1 border-1 rounded-xl border-black w-full"
-            onChange={(majorOptions) => props.setMajor(majorOptions)}
+            className="mt-1 flex-1 border-1 rounded-xl border-black w-full bg-white"
+            onChange={(majorOption) => props.setMajor(majorOption)}
           />
         </div>
       </div>
@@ -65,7 +65,7 @@ const SchoolInfo = (props) => {
             step="1"
             value={props.year}
             autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
+            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
             onChange={(evt) => props.setYear(evt.target.value)}
           ></input>
         </div>
@@ -78,7 +78,7 @@ const SchoolInfo = (props) => {
           <input
             value={props.email}
             autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
+            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
             onChange={(evt) => props.setEmail(evt.target.value)}
           ></input>
         </div>
@@ -88,7 +88,7 @@ const SchoolInfo = (props) => {
           <input
             value={props.studentId}
             autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left"
+            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
             onChange={(evt) => props.setStudentId(evt.target.value)}
           ></input>
         </div>

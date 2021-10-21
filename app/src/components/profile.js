@@ -53,12 +53,10 @@ const Profile = (props) => {
 
       <div className="flex-1 text-xl mb-4 text-left">{props.oneLiner}</div>
       <div className="items-center mb-8">
-        {props.profilePublicView?.get("cropped_pic") && (
-          <img
-            className="mr-4 h-96 w-144 items-center border-green-100 border-4 rounded-xl object-cover"
-            src={props.profilePublicView?.get("cropped_pic")}
-          ></img>
-        )}
+        <img
+          className="mr-4 h-96 w-144 items-center border-green-100 border-4 rounded-xl object-cover"
+          src={props.profilePublicView?.get("cropped_pic")}
+        ></img>
       </div>
       <div className="flex flex-row mb-2">
         <div className="flex mr-4 text-sm items-end w-1/12">Year: </div>

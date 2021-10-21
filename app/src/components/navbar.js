@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AnchorLink from "react-anchor-link-smooth-scroll";
-import logo from "../images/logooo.png";
+import logo from "../images/logo4.png";
 import { useMoralis } from "react-moralis";
 import { formatAddress } from "../utils/utils";
 import { Link, useHistory, useLocation } from "react-router-dom";

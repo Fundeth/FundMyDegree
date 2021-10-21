@@ -29,7 +29,7 @@ Moralis.Cloud.define("insertUserBasic", async (request) => {
     userBasic.set("portfolio_link", request.params.portfolio_link);
     userBasic.set("phone", request.params.phone);
     userBasic.set("ethAddress", request.user.get("ethAddress"));
-    userBasic.set("cropped_pic", request.user.cropped_pic);
+    userBasic.set("cropped_pic", request.params.cropped_pic);
 
     try {
       await userBasic.save();
@@ -56,7 +56,7 @@ Moralis.Cloud.define("insertUserBasic", async (request) => {
     results.set("photo_dimension", request.params.photo_dimension);
     results.set("portfolio_link", request.params.portfolio_link);
     results.set("phone", request.params.phone);
-    results.set("cropped_pic", request.user.cropped_pic);
+    results.set("cropped_pic", request.params.cropped_pic);
 
     try {
       await results.save();

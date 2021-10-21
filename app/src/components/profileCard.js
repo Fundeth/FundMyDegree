@@ -24,7 +24,7 @@ const ProfileCard = (props) => {
               </div>
             </div>
           </div>
-          <div class="bg-cover bg-center h-12 m-4 mt-2 mb-0 justify-center text-md">
+          <div class="bg-cover bg-center h-24 m-4 mt-2 mb-0 justify-center text-md">
             {props.campaign.get("oneLiner")}
           </div>
 
@@ -70,7 +70,8 @@ const ProfileCard = (props) => {
                 />
               </svg>
               <p class="ml-2">
-                {props.campaign.get("degree")} in {props.campaign.get("major")}
+                {props.campaign.get("degree")?.label} in{" "}
+                {props.campaign.get("major")?.label}
               </p>
             </div>
           </div>
@@ -90,7 +91,7 @@ const ProfileCard = (props) => {
                   d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"
                 />
               </svg>
-              <p class="ml-2">{props.campaign.get("school").label}</p>
+              <p class="ml-2">{props.campaign.get("school")?.label}</p>
             </div>
           </div>
         </div>

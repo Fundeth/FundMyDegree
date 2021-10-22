@@ -27,54 +27,13 @@ const Review = (props) => {
           ></input>
         </div>
       </div>
-      <div className="flex flex-row mt-8">
-        <div className="flex flex-col w-7/12">
-          <div className="flex flex-row text-sm">Address 1</div>
 
-          <input
-            value={props.address1}
-            autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
-          ></input>
-        </div>
-      </div>
-      <div className="flex flex-row mt-8">
-        <div className="flex flex-col w-7/12">
-          <div className="ml-2 flex flex-row text-sm">Address 2</div>
-
-          <input
-            value={props.address2}
-            autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
-          ></input>
-        </div>
-      </div>
       <div className="flex flex-row mt-8">
         <div className="flex flex-col w-1/4 mr-8">
-          <div className="ml-2 flex flex-row text-sm">City</div>
-
-          <input
-            value={props.city}
-            autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
-          ></input>
-        </div>
-        <div className="flex flex-col w-1/4 ml-8">
           <div className="ml-2 flex flex-row text-sm">State</div>
 
           <input
             value={props.state}
-            autoFocus
-            className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
-          ></input>
-        </div>
-      </div>
-      <div className="flex flex-row mt-8">
-        <div className="flex flex-col w-1/4 mr-8">
-          <div className="ml-2 flex flex-row text-sm">Postal Code</div>
-
-          <input
-            value={props.postalCode}
             autoFocus
             className="mt-1 flex-1 p-2 bg-transparent outline-none w-full border-1 border-black rounded-xl items-left bg-white"
           ></input>

@@ -1,2 +1,38 @@
-# FundMyDegree
-FundMyDegree is a globally accessible donation platform that connects funders, students, and universities by transferring currency through crypto-wallets. At FundMyDegree, we envision a future where students of all socio-economic backgrounds have equal opportunity to pay for college. By using this platform, students will be able to receive their higher education and career goals without fiscal constraints.
+# The Problem
+## Why did we start FundMyDegree?
+  Every year, attending college or university becomes less affordable for prospective students. It is expected that every year, the tuition cost will inflate 8%, and every nine years, the price will double. Many students take out loans to pay for tuition, but this amounts to crippling student debt that graduates cannot afford. In fact, overall student debt has more than doubled since 2008, increasing from about $600 billion to $1.73 trillion. Out of all the student borrowers, 42.3 million are actively in debt, averaging at $39,351 per person. Despite this, more students are going to college, with an increase of economically challenged students in attendance. College is essential in improving one’s job prospects, but in order to get higher education, students have to pay exorbitant sums of money. It seems counterintuitive; how can people get jobs and make money when they are burdened by student debt? Even students who do get bachelor’s degrees cannot easily find a job, especially if they are in such debt.
+
+	While more people are going to college, the United States still has a 40% dropout rate overall. And of the students that drop out, about 38% of them do so due to financial constraints. This was the most common reason to drop out. The average amount of student loan debt per student is 37k, which is far too much to pay back if they go through with their degree. Because of the dropout rate, $3.8 billion is lost from university every year. Even worse, the COVID-19 pandemic has increased the dropout rate, as many families have suffered financially all over the world. Capable and determined students are forced to leave school for reasons out of their control.
+
+	This issue has never been more pressing. As more students look to higher education, the national student debt will inflate. Every student deserves an avenue to their career ambitions, and for many of them, that includes higher education. Although undergraduate attendance is growing, the fear of student debt still prevents students from going to their dream schools, since they don’t always give sufficient aid. Still, economically challenged students are isolated from fields and schools where they could excel. 
+# Our Solution
+  FundMyDegree is a globally accessible donation platform that connects funders, students, and universities through transferring currency through crypto-wallets. At FundMyDegree, we envision a future where students of all socio-economic backgrounds have equal opportunity to pay for college. By using this platform, students will be able to receive an education without fiscal constraints.
+
+	This solution is secure due to the use of smart contracts and direct remittance to the university. In addition, FundMyDegree is borderless, meaning that anyone from around the world can fund or be funded to go to institutions partnered with FundMyDegree. Because crypto technology is transparent, all transfers of money will be available to check. All the information is Cloud hosted, which means that it is easy to access. Also, FundMyDegree can be easily integrated into the institution’s websites and technology.
+	
+	By using FundMyDegree, funders will have the opportunity to give back to their community by helping students go to college and decreasing the amount of student debt. In fact, according to Business Insider, decreasing the amount of national student debt could increase the US GDP. In addition, this is the perfect way to give back to your alumni community. If you are an advocate for your institution, then funding a student could help you contribute. Also, by contributing to a campaign, you can receive an NFT certification. The certificate can be used for discounts through partners of FundMyDegree and show that you are an active contributor to your community. If the student does not use the money or drops out, the funds will be returned to your wallet.
+
+	Students using FundMyDegree can decrease their cost of attendance and control how much they want to disburse to their respective universities per semester. This is an opportunity for you to achieve what you’re capable of without thinking about finances. By using funds raised by your campaign, the amount that you will have to pay, or take out through loans, could be less. Your future is extremely important, and with FundMyDegree, it can become your reality.
+
+By implementing FundMyDegree at your institution, enrolled students will have more options to pay for college. Less students will be financially isolated from higher education, which will cause more people to attend. Also, this will make it less likely that students will drop out, and in turn, will reduce the losses to your university or college. As technology and finance evolve, education will also evolve. By registering your institution to FundMyDegree, you will be at the forefront of the movement for the globalization and accessibility of education. Because of the COVID-19 pandemic, many universities are struggling with reduced revenue with the same operational costs. By using FundMyDegree, the gap between revenue and operational cost at your institution can close.
+
+# Use FundMyDegree
+### Funder
+  Connect your Metamask wallet to the FundMyDegree application. Click donate on an active campaign that interests you. You will see the student’s target amount and information. Now, donate any amount that you want. The funds will be locked in the smart contract between you, the student, and the institution. They can only be used to transfer to the university.
+### Student
+  For better results for funding, it is recommended to create campaigns before or during your application process. First, connect your Metamask wallet to the FundMyDegree application. Then, create a campaign through the “I am a student” subtab that includes student achievements,  intended degree, the college decision, and the amount that you would like raised. Now, periodically check how many funds are raised before going to college. After funds are raised, disburse the preferred amount to the college that you are attending through the “Disperse” button. You must provide verification of acceptance to your college of choice. 
+### University
+  First, connect a wallet for the institution. Then, create a school profile. This will allow students to specify your institution when creating their campaign. When the student disburses their preferred amount, the institution will have to approve pending approvals. This is to ensure that the student is enrolled in your institution and is legitimate. After approval, the funds will transfer to the university’s wallet.
+# FAQ
+## Frequently Asked Questions
+### Who are our clients?
+  1) Prospective undergraduate or graduate students who come from low to middle-income families that seek higher education. 
+  2) Funders who are aware of the student debt disparity and want to fund the future successes of students .
+  3)Educational institutions that want to open up financial options to make attendance more accessible to prospective students.
+### I am a student. What is the verification process?
+  Students will need to provide proof of enrollment and must be on-chain. To give proof of enrollment, a student will have to provide the student ID number they receive in the school. 
+### I am a funder. What do I need to fund a student?
+  Funders will need to connect their Metamask Web 3.0 wallet to the application to provide funds to students.
+### I am a university. How can I start accepting crowdfunded tuition?
+  Universities will need to create a wallet and integrate the app into their website for students to use.
+
